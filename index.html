@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nositelinkssearchbox">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="slurp" content="noindex, nofollow">
+<meta name="duckduckbot" content="noindex, nofollow">
+<title>Redirect</title>
+
+<script>
+(function () {
+  var platform = navigator.platform.toLowerCase();
+  if (platform.includes('mac')) {
+    window.location.replace('/mac/index.html');
+  } else {
+    window.location.replace('/windows/page2.html');
+  }
+})();
+</script>
+
+</head>
+<body>
+
+<p>Checking your IP address…</p>
+
+</body>
+</html>

